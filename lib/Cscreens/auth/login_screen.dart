@@ -7,11 +7,11 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:takecare/chat.dart';
-import 'package:takecare/helper/dialogs.dart';
+import 'package:takecare/Cscreens/helper/dialogs.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:takecare/mainScreen.dart';
 
-import '../../api/apis.dart';
+import '../api/apis.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -33,15 +33,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
   _handleGoogleBtnClick() {
     Dialogs.showProgressBar(context);
-    _signInWithGoogle().then((user) {
+    _signInWithGoogle().then((user) async {
       if (user != null) {
         Navigator.pop(context);
-        MaterialPageRoute(builder: (_) => const mainScreen());
+
         log('\nUser:${user.user}' as num);
         log('\nUserAdditionInfo:${user.additionalUserInfo}' as num);
 
-        // Navigator.pushReplacement(
-        //     context, MaterialPageRoute(builder: (_) => const mainScreen()));
+        if (await APIs.userExits()) {
+          // ignore: use_build_context_synchronously
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => const mainScreen()));
+        } else {
+          await APIs.createUser().then((value) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (_) => const mainScreen()));
+          });
+        }
 
         // if ((await APIs.userExists())) {
         //   // ignore: use_build_context_synchronously

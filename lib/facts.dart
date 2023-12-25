@@ -17,7 +17,9 @@ class facts extends StatelessWidget {
         ),
         body: const Center(
           child: Column(
-            children: [Text('Facts', style: TextStyle(fontSize: 40))],
+            children: [
+              Center(child: Text('Facts', style: TextStyle(fontSize: 40)))
+            ],
           ),
         ),
       ),

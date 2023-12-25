@@ -1,16 +1,24 @@
-import 'dart:math';
+//import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:takecare/Cscreens/models/chat_user.dart';
+import 'package:takecare/Cscreens/widgets/chat_user_card.dart';
 //import 'package:takecare/widgets/chat_user_card.dart';
-import 'dart:convert';
+//import 'dart:convert';
 //import 'package:flutter/widgets.dart';
-import '../api/apis.dart';
+import 'api/apis.dart';
 
-class Chome extends StatelessWidget {
+class Chome extends StatefulWidget {
   const Chome({super.key});
 
+  @override
+  State<Chome> createState() => _ChomeState();
+}
+
+class _ChomeState extends State<Chome> {
+  static List<ChatUser> list = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,23 +49,37 @@ class Chome extends StatelessWidget {
       body: StreamBuilder(
         stream: APIs.firestore.collection('users').snapshots(),
         builder: (context, snapshot) {
-          final list = [];
-          if (snapshot.hasData) {
-            final data = snapshot.data?.docs;
-            for (var i in data!) {
-              // var jasonEncode2 = jasonEncode;
-              print('${jsonEncode(i.data())}' );
-              list.add(i.data()['name']);
-            }
+          switch (snapshot.connectionState) {
+
+            // If data is loading
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+              return const Center(child: CircularProgressIndicator());
+
+            //If some or all data is loaded then show it
+            case ConnectionState.active:
+            case ConnectionState.done:
+              final data = snapshot.data?.docs;
+              list =
+                  data?.map((e) => ChatUser.fromJson(e.data())).toList() ?? [];
+              if (list.isNotEmpty) {
+                return ListView.builder(
+                  itemCount: list.length,
+                  padding: const EdgeInsets.only(top: 5),
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return ChatUserCard(user: list[index]);
+                  },
+                );
+              } else {
+                return const Center(
+                  child: Text(
+                    'No Connections Found...',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                );
+              }
           }
-          return ListView.builder(
-            itemCount: list.length,
-            padding: const EdgeInsets.only(top: 5),
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              return Text('Name: ${list[index]}');
-            },
-          );
         },
       ),
     );

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+//import 'package:takecare/Cscreens/api/models/chat_user.dart';
+import 'package:takecare/Cscreens/models/chat_user.dart';
+//import 'package:takecare/Cscreens/Chome.dart';
 import 'package:takecare/home.dart';
-
 import 'facts.dart';
 //import 'home.dart';
 import 'chat.dart';
 import 'profile.dart';
 
 class mainScreen extends StatefulWidget {
+  
+
   const mainScreen({super.key});
 
   @override
@@ -15,12 +19,15 @@ class mainScreen extends StatefulWidget {
 
 // ignore: camel_case_types
 class _mainScreenState extends State<mainScreen> {
+  final List<ChatUser> list = [];
   int myIndex = 0;
   List<Widget> widgetlist = const [
     home(),
     chat(),
     facts(),
-    profile(),
+    Profile(
+      user: list[0],
+    ),
   ];
 
   @override
