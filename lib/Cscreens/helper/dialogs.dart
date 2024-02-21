@@ -6,6 +6,7 @@ class Dialogs {
       content: Text(msg),
       backgroundColor: Colors.blue.withOpacity(0.6),
       behavior: SnackBarBehavior.floating,
+      duration: const Duration(seconds: 1),
     ));
   }
 

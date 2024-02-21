@@ -15,11 +15,11 @@ class home extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
-        body: const Center(
-          child: Column(
-            children: [Text('Home', style: TextStyle(fontSize: 40))],
-          ),
-        ),
+        body: const Column(
+          children: [
+            
+          ],
+        )
       ),
     );
   }

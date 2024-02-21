@@ -14,7 +14,7 @@ class APIs {
 
   //for checking user exists or not
   static Future<bool> userExits() async {
-    return (await firestore.collection('users').doc(user.uid).get()).exists;
+    return (await firestore.collection('users').doc(user.email).get()).exists;
   }
 
   //for creating new user
@@ -27,13 +27,13 @@ class APIs {
         name: user.displayName.toString(),
         createdAt: time,
         isOnline: true,
-        id: user.uid,
+        id: user.uid.toString(),
         lastActive: time,
         email: user.email.toString(),
         pushToken: "");
     return await firestore
         .collection('users')
-        .doc(user.uid)
+        .doc(user.email)
         .set(chatUser.toJson());
   }
 }

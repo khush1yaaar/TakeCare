@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:takecare/Cscreens/models/chat_user.dart';
 import 'package:takecare/Cscreens/widgets/chat_user_card.dart';
+import 'package:takecare/Cscreens/profile.dart';
 //import 'package:takecare/widgets/chat_user_card.dart';
 //import 'dart:convert';
 //import 'package:flutter/widgets.dart';
@@ -14,10 +15,10 @@ class Chome extends StatefulWidget {
   const Chome({super.key});
 
   @override
-  State<Chome> createState() => _ChomeState();
+  State<Chome> createState() => ChomeState();
 }
 
-class _ChomeState extends State<Chome> {
+class ChomeState extends State<Chome> {
   static List<ChatUser> list = [];
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,12 @@ class _ChomeState extends State<Chome> {
         ),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => Profile(user: list[0])));
+              },
+              icon: const Icon(Icons.more_vert))
         ],
       ),
       floatingActionButton: Padding(
@@ -50,7 +56,6 @@ class _ChomeState extends State<Chome> {
         stream: APIs.firestore.collection('users').snapshots(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
-
             // If data is loading
             case ConnectionState.waiting:
             case ConnectionState.none:
