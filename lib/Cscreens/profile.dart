@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:takecare/Cscreens/api/apis.dart';
 import 'package:takecare/Cscreens/auth/login_screen.dart';
-import 'package:takecare/Cscreens/helper/dialogs.dart';
+//import 'package:takecare/Cscreens/helper/dialogs.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 import 'package:takecare/Cscreens/models/chat_user.dart';
 import 'package:takecare/chat.dart';
