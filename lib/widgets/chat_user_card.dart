@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:takecare/Cscreens/models/chat_user.dart';
+import 'package:takecare/models/chat_user.dart';
 
-import '../../chat.dart';
+import '../chat.dart';
 // import 'package:takecare/lib/Cscreens/models/chat_user.dart';
 
 // import '../chat.dart';

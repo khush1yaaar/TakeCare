@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:takecare/Cscreens/models/chat_user.dart';
+import 'package:takecare/models/chat_user.dart';
 
 class APIs {
   //for firebase Authentication

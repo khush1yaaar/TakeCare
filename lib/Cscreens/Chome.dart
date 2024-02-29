@@ -3,13 +3,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:takecare/Cscreens/models/chat_user.dart';
-import 'package:takecare/Cscreens/widgets/chat_user_card.dart';
+import 'package:takecare/models/chat_user.dart';
+import 'package:takecare/widgets/chat_user_card.dart';
 import 'package:takecare/Cscreens/profile.dart';
 //import 'package:takecare/widgets/chat_user_card.dart';
 //import 'dart:convert';
 //import 'package:flutter/widgets.dart';
-import 'api/apis.dart';
+import '../api/apis.dart';
 
 class Chome extends StatefulWidget {
   const Chome({super.key});
