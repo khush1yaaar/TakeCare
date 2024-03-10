@@ -10,6 +10,7 @@ import 'package:takecare/auth/login_email.dart';
 import 'package:takecare/chat.dart';
 import 'package:takecare/helper/dialogs.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:takecare/home.dart';
 import 'package:takecare/mainScreen.dart';
 
 import '../api/apis.dart';
@@ -97,14 +98,6 @@ class _LoginScreenState extends State<LoginScreen> {
   //   await GoogleSignIn().signOut();
   // }
 
-  // ignore: non_constant_identifier_names
-  _SignInWithEmail() {
-    Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (_) => const LoginEmailScreen()));
-  }
-
-  // ignore: non_constant_identifier_names
-  _SignInWithPhoneNumber() {}
 
   @override
   Widget build(BuildContext context) {
@@ -117,11 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
-      body:
-          //  Stack(
-          //   children: [
-
-          Column(
+      body:Stack(
         children: [
           AnimatedPositioned(
             top: mq.height * .15,
@@ -130,101 +119,35 @@ class _LoginScreenState extends State<LoginScreen> {
             duration: const Duration(seconds: 1),
             child: Image.asset('assets/images/logo3.jpg'),
           ),
-          Column(
-            children: [
-              const SizedBox(
-                height: 50,
-                width: 50,
-              ),
-              Positioned(
-                bottom: mq.height * .15,
-                left: mq.width * .05,
-                width: mq.width * .9,
-                height: mq.height * .06,
-                child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(255, 223, 255, 187)),
-                    onPressed: () {
-                      _handleGoogleBtnClick();
-                    },
-                    icon: Image.asset(
-                      'assets/images/google.png',
-                      height: mq.height * .03,
-                    ),
-                    label: RichText(
-                      text: const TextSpan(
-                          style: TextStyle(color: Colors.black),
-                          children: [
-                            TextSpan(text: 'Sign In with '),
-                            TextSpan(
-                                text: 'Google',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                          ]),
-                    )),
-              ),
-              Positioned(
-                bottom: mq.height * .15,
-                left: mq.width * .05,
-                width: mq.width * .9,
-                height: mq.height * .06,
-                child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(255, 223, 255, 187)),
-                    onPressed: () {
-                      _SignInWithEmail();
-                    },
-                    icon: const Icon(
-                      Icons.email,
-                      color: Colors.black,
-                    ),
-                    label: RichText(
-                      text: const TextSpan(
-                          style: TextStyle(color: Colors.black),
-                          children: [
-                            TextSpan(text: 'Sign In with '),
-                            TextSpan(
-                                text: 'Email',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                          ]),
-                    )),
-              ),
-              Positioned(
-                bottom: mq.height * .15,
-                left: mq.width * .05,
-                width: mq.width * .9,
-                height: mq.height * .06,
-                child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(255, 223, 255, 187)),
-                    onPressed: () {
-                      _SignInWithPhoneNumber();
-                    },
-                    icon: const Icon(
-                      Icons.phone,
-                      color: Colors.black,
-                    ),
-                    label: RichText(
-                      text: const TextSpan(
-                          style: TextStyle(color: Colors.black),
-                          children: [
-                            TextSpan(text: 'Sign In with '),
-                            TextSpan(
-                                text: 'Phone number',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                          ]),
-                    )),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-            ],
+          Positioned(
+            bottom: mq.height * .15,
+            left: mq.width * .05,
+            width: mq.width * .9,
+            height: mq.height * .06,
+            child: ElevatedButton.icon(
+               style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        const Color.fromARGB(255, 223, 255, 187)),
+                onPressed: () {
+                  _handleGoogleBtnClick();
+                },
+                icon: Image.asset(
+                  'assets/images/google.png',
+                  height: mq.height * .03,
+                ),
+                label: RichText(
+                  text: const TextSpan(
+                      style: TextStyle(color: Colors.black),
+                      children: [
+                        TextSpan(text: 'Sign In with '),
+                        TextSpan(
+                            text: 'Google',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                      ]),
+                )),
           ),
         ],
       ),
-      //],),
     );
   }
 }
