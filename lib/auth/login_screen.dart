@@ -6,11 +6,9 @@ import 'dart:io';
 //import '../../api/apis.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:takecare/auth/login_email.dart';
 import 'package:takecare/chat.dart';
 import 'package:takecare/helper/dialogs.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:takecare/home.dart';
 import 'package:takecare/mainScreen.dart';
 
 import '../api/apis.dart';
@@ -97,7 +95,6 @@ class _LoginScreenState extends State<LoginScreen> {
   //   await FirebaseAuth.instance.signOut();
   //   await GoogleSignIn().signOut();
   // }
-
 
   @override
   Widget build(BuildContext context) {
