@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:takecare/Cscreens/api/models/chat_user.dart';
-import 'package:takecare/home.dart';
-import 'package:takecare/progess.dart';
-import 'facts.dart';
+import 'package:takecare/screens/home.dart';
+import 'package:takecare/screens/progess.dart';
+import 'package:takecare/screens/facts.dart';
 //import 'home.dart';
 import 'chat.dart';
 

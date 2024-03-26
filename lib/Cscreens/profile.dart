@@ -9,7 +9,7 @@ import 'package:takecare/auth/login_screen.dart';
 //import 'package:takecare/Cscreens/helper/dialogs.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 import 'package:takecare/models/chat_user.dart';
-import 'package:takecare/chat.dart';
+import 'package:takecare/screens/chat.dart';
 //import 'package:takecare/Cscreens/widgets/chat_user_card.dart';
 //import 'package:takecare/widgets/chat_user_card.dart';
 //import 'dart:convert';

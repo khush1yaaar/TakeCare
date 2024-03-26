@@ -6,10 +6,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:takecare/auth/login_screen.dart';
-import 'package:takecare/chat.dart';
-import 'package:takecare/mainScreen.dart';
+import 'package:takecare/screens/chat.dart';
+import 'package:takecare/screens/mainScreen.dart';
 
-import 'api/apis.dart';
+import '../api/apis.dart';
 // import 'package:takecare/helper/dialogs.dart';
 // import 'package:takecare/mainScreen.dart';
 // import 'package:google_sign_in/google_sign_in.dart';

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:takecare/models/chat_user.dart';
 
-import '../chat.dart';
+import '../screens/chat.dart';
 // import 'package:takecare/lib/Cscreens/models/chat_user.dart';
 
 // import '../chat.dart';
