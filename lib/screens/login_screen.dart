@@ -21,16 +21,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final List<Widget> _pages = [
     const PageContent(
-      imageAsset: 'lib/images/enteraddress.png',
-      text: 'Set Your Delivery Location',
+      imageAsset: 'lib/images/image1.png',
+      text: 'Know Your self better',
     ),
     const PageContent(
-      imageAsset: 'lib/images/ordermilk.png',
-      text: 'Order Fresh Farm Milk From Milcko',
+      imageAsset: 'lib/images/image2.png',
+      text: 'heal others and your self',
     ),
     const PageContent(
-      imageAsset: 'lib/images/deliveryboy.png',
-      text: 'Eco Friendly Delivery at your DoorStep',
+      imageAsset: 'lib/images/image3.png',
+      text: 'be the best version of your self',
     ),
   ];
 
