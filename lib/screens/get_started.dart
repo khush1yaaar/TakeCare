@@ -43,7 +43,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                         }, 
                         style: ButtonStyle(
                         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.orangeAccent),
+                        backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 161, 242, 164)),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25.0),
                           ),),

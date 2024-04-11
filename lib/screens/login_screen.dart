@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
     ),
     const PageContent(
       imageAsset: 'lib/images/image2.png',
-      text: 'heal others and your self',
+      text: 'heal your self and others',
     ),
     const PageContent(
       imageAsset: 'lib/images/image3.png',
@@ -127,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           const SizedBox(height: 50),
-          const Text('Ready to be Healthy and Nature Supportive?',style: TextStyle(color: Colors.grey,fontSize: 15),),
+          const Text('Ready to feel better?',style: TextStyle(color: Colors.grey,fontSize: 15),),
           const SizedBox(height: 20),
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 161, 242, 164),),
