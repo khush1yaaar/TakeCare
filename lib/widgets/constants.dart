@@ -33,3 +33,9 @@ const Api = '';
 
 // PATH IN CMD WHERE THE COMMAND SHOULD BE EXECUTED
 //C:\Program Files\Java\jdk-21\bin>
+
+
+// Platform  Firebase App Id
+// web       1:129204740589:web:44fcbf607086274fa9c7e4
+// android   1:129204740589:android:e1002771f467ab57a9c7e4
+// ios       1:129204740589:ios:75ec7b79d6f0bceca9c7e4

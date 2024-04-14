@@ -1,12 +1,9 @@
-import 'dart:io';
-
-import 'package:dots_indicator/dots_indicator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:takecare/screens/home_screen.dart';
-import 'package:takecare/widgets/constants.dart';
-import 'package:takecare/widgets/utils.dart';
+import 'package:provider/provider.dart';
+import 'package:takecare/auth/auth_provider.dart';
+import 'package:takecare/models/user_model.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,165 +13,141 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final PageController _controller = PageController();
-  int _currentPage = 0;
 
-  final List<Widget> _pages = [
-    const PageContent(
-      imageAsset: 'lib/images/image1.png',
-      text: 'Know Your self better',
-    ),
-    const PageContent(
-      imageAsset: 'lib/images/image2.png',
-      text: 'heal your self and others',
-    ),
-    const PageContent(
-      imageAsset: 'lib/images/image3.png',
-      text: 'be the best version of your self',
-    ),
-  ];
+  final TextEditingController phoneController = TextEditingController();
+  Country selectedCountry = Country(
+    phoneCode: '91', 
+    countryCode: 'IN', 
+    e164Sc: 0, 
+    geographic: true, 
+    level: 1, 
+    name: 'India', 
+    example: 'India', 
+    displayName: 'India', 
+    displayNameNoCountryCode: 'IN', 
+    e164Key: '');
 
-  @override
-  void initState() {
-    super.initState();
-    _startAutoScroll();
+    @override
+  void dispose() {
+    super.dispose();
+    //phoneController.dispose(); 
   }
-
-  void _startAutoScroll() {
-    Future.delayed(Duration(seconds: 3), () {
-      if (_currentPage == _pages.length - 1) {
-        _controller.jumpToPage(0);
-      } else {
-        _controller.nextPage(
-          duration: Duration(milliseconds: 500),
-          curve: Curves.easeInOut,
-        );
-      }
-      _startAutoScroll();
-    });
-  }
-
-  _handleGoogleBtnClick(){
-    showProgressBar(context);
-    _signInWithGoogle().then((user) {
-      Navigator.pop(context);
-      if(user != null){
-        print('USER ${user.user}');
-        print('USER INFO${user.additionalUserInfo}');
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-      }
-    });
-  }
-  Future<UserCredential?> _signInWithGoogle() async {
-      try{
-      await InternetAddress.lookup('google.com');
-        // Trigger the authentication flow
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    
-      // Obtain the auth details from the request
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-
-      // Create a new credential
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-
-      // Once signed in, return the UserCredential
-      return await FirebaseAuth.instance.signInWithCredential(credential);
-      } catch(e){
-        print(e);
-        showSnackbar(context, 'Something went wrong. Check Internet Connection');
-        return null;
-      }
-    }
-    //sign out function
-    _signOut() async {
-      await FirebaseAuth.instance.signOut();
-      await GoogleSignIn().signOut();
-    }
-
+  
   @override
   Widget build(BuildContext context) {
+    phoneController.selection = TextSelection.fromPosition(
+      TextPosition(offset: phoneController.text.length),
+    );
+
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: SizedBox(
-              height: 100,
-              child: PageView(
-                controller: _controller,
-                children: _pages,
-                onPageChanged: (index) {
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.asset('lib/images/imgphone.png'),
+            const Text('OTP Verification',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+            const Text('We will send you an One Time Password on \n                      this Mobile Number',style: TextStyle(color: Colors.grey),),
+            const SizedBox(
+              height: 40,
+            ),
+            const Text('Entre your Mobile Number'),
+            const SizedBox(
+              height: 40,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15,right: 15),
+              child: TextFormField(
+                cursorColor: Colors.orange,
+                controller: phoneController,
+                onChanged: (value){
                   setState(() {
-                    _currentPage = index;
+                    phoneController.text = value;
                   });
                 },
-              ),
+                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),
+                decoration: InputDecoration(
+                  hintText: 'Entre phone number',
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.black12)
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.black)
+                  ),
+                  prefixIcon: Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onTap: (){
+                          showCountryPicker(
+                            context: context, 
+                            countryListTheme: const CountryListThemeData(
+                              bottomSheetHeight: 500),
+                            onSelect: (value){
+                            setState(() {
+                              selectedCountry = value;
+                            });
+                          });
+                        },
+                        child: Text("${selectedCountry.flagEmoji}  +${selectedCountry.phoneCode}",
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),),
+                      ),
+                    ),
+                  ),
+                  suffixIcon: phoneController.text.length == 10? const Icon(Icons.done,color: Colors.green,size: 30,):null,
+                  ),
+              ), 
             ),
-          ),
-          SizedBox(height: 20),
-          DotsIndicator(
-            dotsCount: _pages.length,
-            position: _currentPage,
-            decorator: DotsDecorator(
-              size: const Size.square(9.0),
-              activeSize: const Size(18.0, 9.0),
-              activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              activeColor: Color.fromARGB(255, 161, 242, 164),
+            const SizedBox(
+              height: 40,
             ),
-          ),
-          const SizedBox(height: 50),
-          const Text('Ready to feel better?',style: TextStyle(color: Colors.grey,fontSize: 15),),
-          const SizedBox(height: 20),
-          ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 161, 242, 164),),
-            onPressed: () async {
-              _handleGoogleBtnClick();
-            },
-            icon: Image.asset('lib/images/google.png', height: 30),
-            label: RichText(text: 
-            const TextSpan(
-              style: TextStyle(color: Colors.black),
-              children: [
-                TextSpan(text: 'Sign in with '),
-                TextSpan(text: 'Google',style: TextStyle(fontWeight: FontWeight.bold))
-              ]
-            )),
-          ),
-
-          const SizedBox(height: 40),
-          const SizedBox(height: 50),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(left: 30,right: 30),
+              child: SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                          onPressed: () {
+                            storeData();
+                            sendPhoneNumber();
+                            print('called sendPhone Number');
+                          }, 
+                          style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor: MaterialStateProperty.all<Color>(Colors.orangeAccent),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                            ),),
+                          ),
+                          child: const Text('Get OTP', style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),),
+                              ),
+            )
+          ],
+        ),
       ),
     );
   }
-}
-
-class PageContent extends StatelessWidget {
-  final String imageAsset;
-  final String text;
-
-  const PageContent({
-    required this.imageAsset,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Image.asset(imageAsset),
-          ),
-        Text(
-          text,
-          style: kPageViewTextStyle,
-          textAlign: TextAlign.center,
-        ),
-      ],
+  void storeData(){
+    final ap = Provider.of<AuthProvider>(context,listen: false);
+    //MapScreenState location = MapScreenState();
+    UserModel userModel = UserModel(
+      phoneNumber: phoneController.text.trim(), 
+      name: "",
+      uid: ""
     );
+    ap.saveUserDataToFirebase(
+      context: context,
+      userModel: userModel,
+      OnSuccess: (){}
+    );
+  }
+  void sendPhoneNumber(){
+    final ap = Provider.of<AuthProvider>(context,listen: false);
+    String phoneNumber = phoneController.text.trim();
+    ap.signInWithPhone(context,"+91$phoneNumber");
   }
 }

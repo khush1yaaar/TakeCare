@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
+  static String id = 'home-screen';
   const HomeScreen({super.key});
 
   @override
@@ -10,6 +11,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      body: Center(child: Text('Home Screen')),
+    );
   }
 }

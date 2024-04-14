@@ -38,7 +38,12 @@ dependencies:
   firebase_core: ^2.29.0
   dots_indicator: ^3.0.0
   firebase_auth: ^4.19.1
-  google_sign_in: ^6.2.1
+  firebase_storage: ^11.7.1
+  cloud_firestore: ^4.16.0
+  shared_preferences: ^2.2.3
+  provider: ^6.1.2
+  pinput: ^4.0.0
+  country_picker: ^2.0.25
 
 dev_dependencies:
   flutter_test:

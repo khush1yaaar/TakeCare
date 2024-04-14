@@ -1,10 +1,10 @@
 class UserModel{
-  String email;
+  String phoneNumber;
   String name;
   String uid;
 
   UserModel({
-  required this.email,
+  required this.phoneNumber,
   required this.name,
   required this.uid,
   });
@@ -12,7 +12,7 @@ class UserModel{
 //from map
   factory UserModel.fromMap(Map<String,dynamic> map){
     return UserModel( 
-      email: map['email'] ?? ' ', 
+      phoneNumber: map['phoneNumber'] ?? ' ', 
       name: map['name'] ?? ' ', 
       uid: map['uid'] ?? ' ',
     );
@@ -21,7 +21,7 @@ class UserModel{
 //to map
   Map<String,dynamic> toMap(){
     return {
-      "email" : email,
+      "phoneNumber" : phoneNumber,
       "name" : name,
       "uid" : uid,
     };
