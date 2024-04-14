@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:takecare/screens/login_screen.dart';
