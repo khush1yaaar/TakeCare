@@ -4,7 +4,6 @@ import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:takecare/auth/auth_provider.dart';
 import 'package:takecare/screens/bottom_nav.dart';
-import 'package:takecare/screens/home_screen.dart';
 import 'package:takecare/screens/login_screen.dart';
 import 'package:takecare/widgets/utils.dart';
 
