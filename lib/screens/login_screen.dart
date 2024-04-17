@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset('lib/images/imgphone.png'),
+            Image.asset('lib/images/image1.png'),
             const Text('OTP Verification',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
             const Text('We will send you an One Time Password on \n                      this Mobile Number',style: TextStyle(color: Colors.grey),),
             const SizedBox(
@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           }, 
                           style: ButtonStyle(
                           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.orangeAccent),
+                          backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 161, 242, 164),),
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.0),
                             ),),

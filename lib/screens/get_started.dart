@@ -87,13 +87,13 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
           const Text('Ready to feel better?',style: TextStyle(color: Colors.grey,fontSize: 15),),
           const SizedBox(height: 20),
           ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 161, 242, 164),),
+            style: ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(255, 161, 242, 164),),
             onPressed: () async {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context)=> const LoginScreen()));
             },
-            icon: Icon(Icons.phone),
+            icon: const Icon(Icons.phone,color: Colors.black,),
             label: RichText(text: 
             const TextSpan(
               style: TextStyle(color: Colors.black),
