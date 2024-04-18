@@ -1,7 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:takecare/auth/auth_provider.dart';
+import 'package:takecare/provider/auth_provider.dart';
 import 'package:takecare/models/user_model.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 

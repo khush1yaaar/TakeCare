@@ -80,7 +80,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
-              activeColor: Color.fromARGB(255, 161, 242, 164),
+              activeColor: const Color.fromARGB(255, 161, 242, 164),
             ),
           ),
           const SizedBox(height: 50),
@@ -89,9 +89,16 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(255, 161, 242, 164),),
             onPressed: () async {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context)=> const LoginScreen()));
+              // AuthProvider helper = AuthProvider();
+              // if(await helper.checkExistingUser()){
+              //   Navigator.pushReplacement(
+              //     context, 
+              //     MaterialPageRoute(builder: (context)=> const BottomNavBar()));
+              //  }else{
+                Navigator.pushReplacement(
+                  context, 
+                  MaterialPageRoute(builder: (context)=> const LoginScreen()));
+              // }
             },
             icon: const Icon(Icons.phone,color: Colors.black,),
             label: RichText(text: 
