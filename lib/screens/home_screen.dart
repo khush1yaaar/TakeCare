@@ -119,7 +119,144 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.grey,
             ),
 
-            //------------------ ARTICLES --------------
+            //------------------ ARTICLE - 1 --------------
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: GestureDetector(
+                onTap: (){
+                  
+                },
+                child: Container(
+                  height: 200,
+                  width: 500,
+                  decoration: BoxDecoration(
+                    color: Colors.blue.shade200,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(
+                        blurRadius: 15,
+                        blurStyle: BlurStyle.solid,
+                        color: Colors.blueGrey
+                      )
+                    ]
+                  ),
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        left: 0,
+                        child: Image.asset('lib/images/stress.png',height: 150,)),
+                      const Positioned(
+                        bottom: 0,
+                        right: 0,
+                        left: 0,
+                        child: Text(
+                          '   Procrastination',
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white70,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            //-------------- ARTICLE - 2 -----------------
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: GestureDetector(
+                onTap: (){
+                  
+                },
+                child: Container(
+                  height: 200,
+                  width: 500,
+                  decoration: BoxDecoration(
+                    color: Colors.blue.shade200,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(
+                        blurRadius: 15,
+                        blurStyle: BlurStyle.solid,
+                        color: Colors.blueGrey
+                      )
+                    ]
+                  ),
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        left: 0,
+                        child: Image.asset('lib/images/selfimage.png',height: 150,)),
+                      const Positioned(
+                        bottom: 0,
+                        right: 0,
+                        left: 0,
+                        child: Text(
+                          '        Self Image',
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white70,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            //------------------ ARTICLE - 3 --------------
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: GestureDetector(
+                onTap: (){
+                  
+                },
+                child: Container(
+                  height: 200,
+                  width: 500,
+                  decoration: BoxDecoration(
+                    color: Colors.blue.shade200,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(
+                        blurRadius: 15,
+                        blurStyle: BlurStyle.solid,
+                        color: Colors.blueGrey
+                      )
+                    ]
+                  ),
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        left: 0,
+                        child: Image.asset('lib/images/burnout.png',height: 150,)),
+                      const Positioned(
+                        bottom: 0,
+                        right: 0,
+                        left: 0,
+                        child: Text(
+                          '         BurnOut',
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white70,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: GestureDetector(

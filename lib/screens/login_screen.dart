@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:takecare/provider/auth_provider.dart';
 import 'package:takecare/models/user_model.dart';
+import 'package:takecare/widgets/utils.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -113,6 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: ElevatedButton(
                           onPressed: () {
                             storeData();
+                            _showLoadingDialog(context);
                             sendPhoneNumber();
                             print('called sendPhone Number');
                           }, 
@@ -153,5 +155,9 @@ class _LoginScreenState extends State<LoginScreen> {
     final ap = Provider.of<AuthProvider>(context,listen: false);
     String phoneNumber = phoneController.text.trim();
     ap.signInWithPhone(context,"+91$phoneNumber");
+  }
+
+  void _showLoadingDialog(BuildContext context) {
+    Dialogs.showLoadingDialog(context, 'Sending OTP...');
   }
 }
