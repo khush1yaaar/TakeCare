@@ -18,15 +18,15 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
 
   final List<Widget> _pages = [
     const PageContent(
-      imageAsset: 'lib/images/image1.png',
+      imageAsset: 'lib/images/puzzle.png',
       text: 'Know Your self better',
     ),
     const PageContent(
-      imageAsset: 'lib/images/image2.png',
-      text: 'heal your self and others',
+      imageAsset: 'lib/images/teddy.png',
+      text: 'heal your inner child',
     ),
     const PageContent(
-      imageAsset: 'lib/images/image3.png',
+      imageAsset: 'lib/images/family.png',
       text: 'be the best version of your self',
     ),
   ];
@@ -80,14 +80,14 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
-              activeColor: const Color.fromARGB(255, 161, 242, 164),
+              activeColor: Colors.blue.shade300,
             ),
           ),
           const SizedBox(height: 50),
           const Text('Ready to feel better?',style: TextStyle(color: Colors.grey,fontSize: 15),),
           const SizedBox(height: 20),
           ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(255, 161, 242, 164),),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.blue.shade300),
             onPressed: () async {
               // AuthProvider helper = AuthProvider();
               // if(await helper.checkExistingUser()){
@@ -116,6 +116,9 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
         ],
       ),
     );
+  }
+  void navigateToNextScreen(){
+    
   }
 }
 

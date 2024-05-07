@@ -24,14 +24,14 @@ class _OtpScreenState extends State<OtpScreen> {
       body: isLoading == true? 
       Center(
         child: CircularProgressIndicator(
-          color: Colors.orangeAccent,
+          color: Colors.blue.shade400,
         ),
       ):
       Center(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Image.asset('lib/images/image2.png'),
+              Image.asset('lib/images/teen_image.png'),
               const Text('OTP Verification',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
               const SizedBox(
                 height: 40,
@@ -48,7 +48,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.orangeAccent)
+                    border: Border.all(color: Colors.blue.shade300)
                   ),
                   textStyle: const TextStyle(fontSize: 28)
                 ),
@@ -83,7 +83,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     }, 
                     style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                    backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 161, 242, 164),),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.blue.shade300,),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
                       ),),

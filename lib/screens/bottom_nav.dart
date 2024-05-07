@@ -1,6 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:takecare/screens/articles_screen.dart';
 import 'package:takecare/screens/chat_screen.dart';
 import 'package:takecare/screens/home_screen.dart';
 import 'package:takecare/screens/profile_screen.dart';
@@ -19,26 +18,25 @@ class _BottomNavBarState extends State<BottomNavBar> {
   late Widget currentPage;
   late HomeScreen homeScreen;
   late ChatScreen chatScreen;
-  late ArticlesScreen articlesScreen;
   late ProfileScreen profileScreen;
 
   @override
   void initState() {
     homeScreen = const HomeScreen();
     chatScreen = const ChatScreen();
-    articlesScreen = const ArticlesScreen();
     profileScreen = const ProfileScreen();
 
-    pages = [homeScreen,chatScreen,articlesScreen,profileScreen];
+    pages = [homeScreen, chatScreen, profileScreen];
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         height: 65,
-        backgroundColor: Colors.white,
-        color: Colors.black,
+        backgroundColor: Colors.blue.shade50,
+        color: Color.fromARGB(255, 1, 47, 114),
         animationDuration: Durations.medium2,
         onTap: (index){
           setState(() {
@@ -52,10 +50,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
           Icon(
             Icons.chat_bubble_outline,
-            color: Colors.white,
-          ),
-          Icon(
-            Icons.article_outlined,
             color: Colors.white,
           ),
           Icon(

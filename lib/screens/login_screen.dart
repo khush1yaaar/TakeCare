@@ -43,20 +43,20 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset('lib/images/image1.png'),
+            Image.asset('lib/images/therapy.png'),
             const Text('OTP Verification',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
             const Text('We will send you an One Time Password on \n                      this Mobile Number',style: TextStyle(color: Colors.grey),),
             const SizedBox(
-              height: 40,
+              height: 20,
             ),
             const Text('Entre your Mobile Number'),
             const SizedBox(
-              height: 40,
+              height: 20,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 15,right: 15),
               child: TextFormField(
-                cursorColor: Colors.orange,
+                cursorColor: Colors.blue.shade100,
                 controller: phoneController,
                 onChanged: (value){
                   setState(() {
@@ -118,13 +118,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           }, 
                           style: ButtonStyle(
                           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 161, 242, 164),),
+                          backgroundColor: phoneController.text.length == 10? MaterialStateProperty.all<Color>(Colors.blue.shade100): MaterialStateProperty.all<Color>(Colors.grey),
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.0),
                             ),),
                           ),
-                          child: const Text('Get OTP', style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),),
-                              ),
+                          child: const Text(
+                            'Get OTP', 
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold)),),
+                            ),
             )
           ],
         ),

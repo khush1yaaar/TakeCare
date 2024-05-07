@@ -26,7 +26,7 @@ class Messages extends StatelessWidget {
         right: isUser ? 10: 100
       ),
       decoration: BoxDecoration(
-        color: isUser ? Colors.blueAccent : Colors.grey.shade400,
+        color: isUser ? Colors.blue.shade300 : const Color.fromARGB(174, 189, 189, 189),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10),
           bottomLeft: isUser ? Radius.circular(10): Radius.zero,
@@ -48,5 +48,16 @@ class Messages extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class ChatMessages extends ChangeNotifier {
+  final List<Message> _messages = [];
+
+  List<Message> get messages => _messages;
+
+  void addMessage(Message message) {
+    _messages.add(message);
+    notifyListeners();
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -29,16 +28,22 @@ class MyApp extends StatelessWidget {
         home: GetStartedScreen(),
       ),
     );
-    // MultiProvider(
-    //   providers: [ChangeNotifierProvider(create: (_)=> AuthProvider())],
-    //   child: MaterialApp(
-    //     debugShowCheckedModeBanner: false,
-    //     initialRoute: GetStartedScreen.id,
-    //     routes: {
-    //       HomeScreen.id: (context) =>  const HomeScreen(),
-    //       GetStartedScreen.id: (context) => const GetStartedScreen(),
-    //     }
-    //   ),
-    // );
   }
+  // Widget NavigateToNextScreen(BuildContext context){
+  //   final ap = Provider.of<AuthProvider>(context,listen: false);
+  //   if(ap.isSignedIn){
+  //     // Navigator.pushReplacement(
+  //     //   context, 
+  //     //   MaterialPageRoute(builder: (context)=> const BottomNavBar())
+  //     // );
+  //     return const BottomNavBar();
+  //   }
+  //   else{
+  //     // Navigator.pushReplacement(
+  //     //   context, 
+  //     //   MaterialPageRoute(builder: (context)=> const GetStartedScreen())
+  //     // );
+  //     return const GetStartedScreen();
+  //   }
+  // }
 }
