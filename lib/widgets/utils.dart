@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:takecare/models/user_model.dart';
 import 'package:takecare/provider/auth_provider.dart';
-import 'package:takecare/screens/bottom_nav.dart';
 
 void showSnackbar(BuildContext context,String content) async {
   ScaffoldMessenger.of(context).showSnackBar(
@@ -45,7 +44,6 @@ class Dialogs {
   static Future<void> inputDialog(BuildContext context, String message) async {
     //final TextEditingController _userInput = TextEditingController();
     final TextEditingController phoneController = TextEditingController();
-    final String name = userInput.text; 
     print(userInput.text);  
     return showDialog<void>(
       context: context,
