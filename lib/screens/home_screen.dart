@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pinput/pinput.dart';
+import 'package:takecare/screens/article_screen.dart';
 import 'package:takecare/screens/assessment_screen.dart';
+import 'package:takecare/screens/selfhelp_screen.dart';
+import 'package:takecare/widgets/utils.dart';
 
 class HomeScreen extends StatefulWidget {
   static String id = 'home-screen';
@@ -14,10 +18,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    String name = '';
     return Scaffold(
       backgroundColor: Colors.blue.shade50,
       appBar: AppBar(
-        title: const Text('Hello, There!',style: TextStyle(color: Colors.white),),
+        title: GestureDetector(
+          onTap: (){
+           name = _nameInputPopUp(context);
+          },
+          child: Text(name.length == 0?
+            'Hello, There!':'Hello, $name',
+            style: TextStyle(color: Colors.white),)
+        ),
         backgroundColor: Color.fromARGB(255, 1, 47, 114),
       ),
       body: SingleChildScrollView(
@@ -72,7 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(20.0),
               child: GestureDetector(
                 onTap: (){
-                  
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context)=> const SelfHelpScreen()
+                    )
+                  );
                 },
                 child: Container(
                   height: 200,
@@ -124,7 +141,10 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(20.0),
               child: GestureDetector(
                 onTap: (){
-                  
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder: (context)=> ArticleScreen(heading: 'heading',article:'article'))
+                  );
                 },
                 child: Container(
                   height: 200,
@@ -306,5 +326,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+  String _nameInputPopUp(BuildContext context) {
+    //Dialogs dialog = Dialogs();
+    Dialogs.inputDialog(context, 'Entre Your Name');
+    String name = Dialogs.userInput.text;
+    return name;
   }
 }

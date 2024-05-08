@@ -13,6 +13,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue.shade50,
       appBar: AppBar(
         leading: GestureDetector(
           onTap: (){
@@ -21,7 +22,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           child: Icon(Icons.arrow_back,color: Colors.white)
         ),
         title: const Text('Time to know YourSelf better',style: TextStyle(color: Colors.white),),
-        backgroundColor: Color.fromARGB(255, 1, 47, 114),
+        backgroundColor: const Color.fromARGB(255, 1, 47, 114),
       ),
       body: SingleChildScrollView(
         child: Column(
