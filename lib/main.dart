@@ -14,14 +14,12 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return 
-
-    ChangeNotifierProvider<AuthProvider>(
+  Widget build(BuildContext context){
+    return ChangeNotifierProvider<AuthProvider>(
       create: (context) => AuthProvider(), // Provide an instance of AuthProvider
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -29,21 +27,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-  // Widget NavigateToNextScreen(BuildContext context){
-  //   final ap = Provider.of<AuthProvider>(context,listen: false);
-  //   if(ap.isSignedIn){
-  //     // Navigator.pushReplacement(
-  //     //   context, 
-  //     //   MaterialPageRoute(builder: (context)=> const BottomNavBar())
-  //     // );
-  //     return const BottomNavBar();
-  //   }
-  //   else{
-  //     // Navigator.pushReplacement(
-  //     //   context, 
-  //     //   MaterialPageRoute(builder: (context)=> const GetStartedScreen())
-  //     // );
-  //     return const GetStartedScreen();
-  //   }
-  // }
 }

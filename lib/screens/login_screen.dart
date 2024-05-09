@@ -112,11 +112,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                          onPressed: () {
-                            storeData();
-                            _showLoadingDialog(context);
-                            sendPhoneNumber();
-                            print('called sendPhone Number');
+                          onPressed: () async{
+                            //final ap = Provider.of<AuthProvider>(context,listen: false);
+                            if(phoneController.text.length == 10){
+                              storeData(Dialogs.userInput.text);
+                              _showLoadingDialog(context);
+                              sendPhoneNumber();
+                              print('called sendPhone Number');
+                            }
                           }, 
                           style: ButtonStyle(
                           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -137,12 +140,12 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-  void storeData(){
+  void storeData(String userInput){
     final ap = Provider.of<AuthProvider>(context,listen: false);
     //MapScreenState location = MapScreenState();
     UserModel userModel = UserModel(
       phoneNumber: phoneController.text.trim(), 
-      name: "",
+      name: userInput,
       uid: ""
     );
     ap.saveUserDataToFirebase(

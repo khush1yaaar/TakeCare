@@ -6,6 +6,7 @@ import 'package:takecare/screens/assessment_screen.dart';
 import 'package:takecare/screens/selfhelp_screen.dart';
 import 'package:takecare/widgets/utils.dart';
 
+
 class HomeScreen extends StatefulWidget {
   static String id = 'home-screen';
   const HomeScreen({super.key});
@@ -142,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: (){
                   Navigator.push(
                     context, 
-                    MaterialPageRoute(builder: (context)=> ArticleScreen(heading: 'heading',article:'article'))
+                    MaterialPageRoute(builder: (context)=> ArticleScreen(article:'procrastination',audio: ''))
                   );
                 },
                 child: Container(
@@ -189,7 +190,10 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(20.0),
               child: GestureDetector(
                 onTap: (){
-                  
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder: (context)=> ArticleScreen(article: 'self-esteem', audio: ''))
+                  );
                 },
                 child: Container(
                   height: 200,
@@ -235,7 +239,10 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(20.0),
               child: GestureDetector(
                 onTap: (){
-                  
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder: (context)=> ArticleScreen(article:'self-acceptance',audio: ''))
+                  );
                 },
                 child: Container(
                   height: 200,
