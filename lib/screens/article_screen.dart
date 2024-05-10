@@ -48,28 +48,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
       body: FutureBuilder(
         future: Future.wait([_articleFuture, _videoFuture]),
         builder: (context, snapshot) {
-          //-------------- Article Data -----------------
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          }
-          if (!snapshot.hasData || snapshot.data == null) {
-            return const Center(child: Text('No data found'));
-          }
-
-          // Access the article data from snapshot.data
-          final articleData = snapshot.data![0].data();
-          if (articleData == null || articleData.isEmpty) {
-            return const Center(child: Text('Article data is empty'));
-          }
-
-          // Access individual fields from articleData
-          final articleContent = articleData[widget.article];
-          print('Article content: $articleContent');
-
-
+          
           //------------ YouTube Video data ------------------
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -93,23 +72,36 @@ class _ArticleScreenState extends State<ArticleScreen> {
           
           print('Video content: $videoContent');
 
+
+          //-------------- Article Data -----------------
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+          if (!snapshot.hasData || snapshot.data == null) {
+            return const Center(child: Text('No data found'));
+          }
+
+          // Access the article data from snapshot.data
+          final articleData = snapshot.data![0].data();
+          if (articleData == null || articleData.isEmpty) {
+            return const Center(child: Text('Article data is empty'));
+          }
+
+          // Access individual fields from articleData
+          // final articleContent = articleData[widget.article];
+          // print('Article content: $articleContent');
+
+
           // Return your UI widgets with fetched data
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                //----------- Article--------------
-                if (articleData.containsKey(widget.article) && articleData[widget.article] is String)
-                  Text(
-                    articleData[widget.article] as String,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                if (articleData.containsKey(widget.article) && articleData[widget.article] is! String)
-                  const Text(
-                    'Invalid article content format',
-                    style: TextStyle(fontSize: 16),
-                  ),
+
                 //------------Youtube Video-------------
                 
                 if (videoData.containsKey(widget.article) && videoData[widget.article] is String)
@@ -123,14 +115,37 @@ class _ArticleScreenState extends State<ArticleScreen> {
                         )
                       );
                     },
-                    child: Image.network(
-                      YoutubePlayer
-                      .getThumbnail(
-                        videoId: YoutubePlayer.convertUrlToId(videoData[widget.article])!,
-                      ),
-                      height: 200,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Image.network(
+                          YoutubePlayer
+                          .getThumbnail(
+                            videoId: YoutubePlayer.convertUrlToId(videoData[widget.article])!,
+                          ),
+                          height: 200,
+                        ),
+                        const Icon(
+                          Icons.play_arrow,
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                      ],
                     ),
                   ),
+
+                //----------- Article--------------
+                if (articleData.containsKey(widget.article) && articleData[widget.article] is String)
+                  Text(
+                    articleData[widget.article] as String,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                if (articleData.containsKey(widget.article) && articleData[widget.article] is! String)
+                  const Text(
+                    'Invalid article content format',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                
               ],
             ),
           );

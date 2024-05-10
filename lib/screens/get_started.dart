@@ -1,5 +1,8 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:takecare/provider/auth_provider.dart';
+import 'package:takecare/screens/bottom_nav.dart';
 import 'package:takecare/screens/login_screen.dart';
 import 'package:takecare/widgets/constants.dart';
 
@@ -89,16 +92,13 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue.shade300),
             onPressed: () async {
-              // AuthProvider helper = AuthProvider();
-              // if(await helper.checkExistingUser()){
+              // await isSignedIn() ? 
               //   Navigator.pushReplacement(
               //     context, 
-              //     MaterialPageRoute(builder: (context)=> const BottomNavBar()));
-              //  }else{
+              //     MaterialPageRoute(builder: (context)=> const BottomNavBar())):
                 Navigator.pushReplacement(
                   context, 
                   MaterialPageRoute(builder: (context)=> const LoginScreen()));
-              // }
             },
             icon: const Icon(Icons.phone,color: Colors.black,),
             label: RichText(text: 
@@ -106,7 +106,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               style: TextStyle(color: Colors.black),
               children: [
                 TextSpan(text: 'Sign in with '),
-                TextSpan(text: 'Phone Number',style: TextStyle(fontWeight: FontWeight.bold))
+                TextSpan(text: 'Phone Number',style: TextStyle(fontWeight: FontWeight.bold)),
               ]
             )),
           ),
@@ -117,8 +117,9 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
       ),
     );
   }
-  void navigateToNextScreen(){
-    
+  Future<bool> isSignedIn() async{
+    final ap = Provider.of<AuthProvider>(context,listen: false);
+    return await ap.checkSignIn();
   }
 }
 

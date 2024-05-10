@@ -221,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         right: 0,
                         left: 0,
                         child: Text(
-                          '        Self Image',
+                          '      Self Esteem',
                           style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.bold,
@@ -270,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         right: 0,
                         left: 0,
                         child: Text(
-                          '         BurnOut',
+                          '  Self Acceptance',
                           style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.bold,

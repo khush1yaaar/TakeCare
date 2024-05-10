@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:takecare/models/user_model.dart';
+import 'package:takecare/screens/get_started.dart';
 import 'package:takecare/screens/otp_screen.dart';
 import 'package:takecare/widgets/utils.dart';
 
@@ -29,18 +30,60 @@ class AuthProvider extends ChangeNotifier{
   AuthProvider(){
     checkSignIn();
   }
-  void checkSignIn() async {
+  // Future<bool> checkSignIn() async {
+  //   final SharedPreferences s = await SharedPreferences.getInstance();
+  //   notifyListeners();
+  //   return _isSignedIn = s.getBool("is_signed_in") ?? false;
+  // }
+  Future<bool> checkSignIn() async {
+  try {
     final SharedPreferences s = await SharedPreferences.getInstance();
-
-    _isSignedIn = s.getBool("is_signed_in") ?? false;
+    bool isSignedIn = s.getBool("is_signed_in") ?? false;
+    print('isSignedIn: $isSignedIn');
+    _isSignedIn = isSignedIn;
     notifyListeners();
+    return _isSignedIn;
+  } catch (e) {
+    print('Error checking sign-in: $e');
+    return false;
   }
-  
+}
+
+  Future<void> signOut(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signOut();
+
+      // Clear user session data
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool("is_signed_in", false);
+      //await prefs.remove("is_signed_in");
+
+      // Reset properties
+      _isSignedIn = false;
+      _uid = null;
+      _userModel = null;
+
+      // Notify listeners about the sign-out
+      notifyListeners();
+
+      // Navigate to the sign-in screen or any other desired screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context)=> const GetStartedScreen())
+      );
+    } catch (e) {
+      // Handle sign-out errors, if any
+      print("Error signing out: $e");
+    }
+  }
   void signInWithPhone(BuildContext context,String phoneNumber) async{
     try {
       await _firebaseAuth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async{
+          _isSignedIn = true;
+          final SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setBool("is_signed_in", true);
           await _firebaseAuth.signInWithCredential(phoneAuthCredential);// only when the OTP is completed
         }, 
         verificationFailed: (error){
@@ -49,6 +92,7 @@ class AuthProvider extends ChangeNotifier{
         }, 
         codeSent: (verificationId, forceResendingToken) {
           print('EXECUTED CODE SENT');
+          _isSignedIn = true;
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => OtpScreen(verificationId: verificationId,)),
