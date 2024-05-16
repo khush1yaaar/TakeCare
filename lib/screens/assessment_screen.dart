@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:takecare/screens/question_screen.dart';
 
 // ignore: must_be_immutable
 class AssessmentScreen extends StatefulWidget {
@@ -32,23 +33,31 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    height: 130,
-                    width: 170,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 8, 80, 152),
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 15,
-                        blurStyle: BlurStyle.solid,
-                        color: Colors.blueGrey
-                      )
-                    ]
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context)=> Question(keyword: "anxiety",))
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      height: 130,
+                      width: 170,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 8, 80, 152),
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: const [
+                        BoxShadow(
+                          blurRadius: 15,
+                          blurStyle: BlurStyle.solid,
+                          color: Colors.blueGrey
+                        )
+                      ]
+                      ),
+                      child: const Center(child: Text('Anxiety',style: TextStyle(color: Colors.white,fontSize: 40),)),
                     ),
-                    child: const Center(child: Text('Anxiety',style: TextStyle(color: Colors.white,fontSize: 40),)),
                   ),
                 ),Padding(
                   padding: const EdgeInsets.all(10.0),

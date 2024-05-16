@@ -27,55 +27,81 @@ class AuthProvider extends ChangeNotifier{
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
-  AuthProvider(){
-    checkSignIn();
-  }
+  // AuthProvider(){
+  //   checkSignIn();
+  // }
   // Future<bool> checkSignIn() async {
   //   final SharedPreferences s = await SharedPreferences.getInstance();
   //   notifyListeners();
   //   return _isSignedIn = s.getBool("is_signed_in") ?? false;
   // }
-  Future<bool> checkSignIn() async {
-  try {
-    final SharedPreferences s = await SharedPreferences.getInstance();
-    bool isSignedIn = s.getBool("is_signed_in") ?? false;
-    print('isSignedIn: $isSignedIn');
-    _isSignedIn = isSignedIn;
-    notifyListeners();
-    return _isSignedIn;
-  } catch (e) {
-    print('Error checking sign-in: $e');
-    return false;
-  }
-}
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  
+  Future<bool> checkLoggedIn() async {
+    final user = _auth.currentUser;
+    return user != null;
+  }
+
+  void checkSignIn() async {
+    final SharedPreferences s = await SharedPreferences.getInstance();
+    _isSignedIn = s.getBool('is_signed_in') ?? false;
+    notifyListeners();
+  }
+
+//   Future<bool> checkSignIn() async {
+//   try {
+//     final SharedPreferences s = await SharedPreferences.getInstance();
+//     bool isSignedIn = s.getBool("is_signed_in") ?? false;
+//     print('isSignedIn: $isSignedIn');
+//     _isSignedIn = isSignedIn;
+//     notifyListeners();
+//     return _isSignedIn;
+//   } catch (e) {
+//     print('Error checking sign-in: $e');
+//     return false;
+//   }
+// }
   Future<void> signOut(BuildContext context) async {
     try {
-      await FirebaseAuth.instance.signOut();
-
-      // Clear user session data
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setBool("is_signed_in", false);
-      //await prefs.remove("is_signed_in");
-
-      // Reset properties
-      _isSignedIn = false;
+      await _firebaseAuth.signOut();
       _uid = null;
-      _userModel = null;
-
-      // Notify listeners about the sign-out
-      notifyListeners();
-
-      // Navigate to the sign-in screen or any other desired screen
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context)=> const GetStartedScreen())
-      );
+      _isSignedIn = false;
+      final SharedPreferences s = await SharedPreferences.getInstance();
+      await s.setBool('is_signed_in', false);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> GetStartedScreen())); // Replace '/login' with your login screen route
     } catch (e) {
-      // Handle sign-out errors, if any
-      print("Error signing out: $e");
+      showSnackbar(context, 'Failed to sign out. ${e.toString()}');
     }
   }
+
+  // Future<void> signOut(BuildContext context) async {
+  //   try {
+  //     await FirebaseAuth.instance.signOut();
+
+  //     // Clear user session data
+  //     final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //     await prefs.setBool("is_signed_in", false);
+  //     //await prefs.remove("is_signed_in");
+
+  //     // Reset properties
+  //     _isSignedIn = false;
+  //     _uid = null;
+  //     _userModel = null;
+
+  //     // Notify listeners about the sign-out
+  //     notifyListeners();
+
+  //     // Navigate to the sign-in screen or any other desired screen
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(builder: (context)=> const GetStartedScreen())
+  //     );
+  //   } catch (e) {
+  //     // Handle sign-out errors, if any
+  //     print("Error signing out: $e");
+  //   }
+  // }
   void signInWithPhone(BuildContext context,String phoneNumber) async{
     try {
       await _firebaseAuth.verifyPhoneNumber(

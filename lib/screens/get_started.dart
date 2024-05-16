@@ -2,9 +2,8 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:takecare/provider/auth_provider.dart';
-import 'package:takecare/screens/bottom_nav.dart';
+import 'package:takecare/screens/home_screen.dart';
 import 'package:takecare/screens/login_screen.dart';
-import 'package:takecare/widgets/constants.dart';
 
 
 class GetStartedScreen extends StatefulWidget {
@@ -117,9 +116,28 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
       ),
     );
   }
-  Future<bool> isSignedIn() async{
-    final ap = Provider.of<AuthProvider>(context,listen: false);
-    return await ap.checkSignIn();
+  // Future<bool> isSignedIn() async{
+  //   final ap = Provider.of<AuthProvider>(context,listen: false);
+  //   return await ap.checkSignIn();
+  // }
+
+  void navigateToNextScreen() async {
+    final isUserLoggedIn = await Provider.of<AuthProvider>(context, listen: false).checkLoggedIn();
+    if (isUserLoggedIn) {
+      Navigator.pushReplacement(
+        context, 
+        MaterialPageRoute(
+          builder: (context)=> const HomeScreen(),
+        )
+      );
+    } else {
+      Navigator.pushReplacement(
+        context, 
+        MaterialPageRoute(
+          builder: (context)=> const LoginScreen(),
+        )
+      );
+    }
   }
 }
 
@@ -138,10 +156,13 @@ class PageContent extends StatelessWidget {
       children: [
         Expanded(
           child: Image.asset(imageAsset),
-          ),
+        ),
         Text(
           text,
-          style: kPageViewTextStyle,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+          ),
           textAlign: TextAlign.center,
         ),
       ],

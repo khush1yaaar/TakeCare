@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:intl/intl.dart';
+import 'package:takecare/widgets/constants.dart';
 import 'package:takecare/widgets/messages.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -15,9 +16,16 @@ class _ChatScreenState extends State<ChatScreen> {
 
   final TextEditingController _userInput = TextEditingController();
   final ScrollController _scrollController = ScrollController(); 
-  final apiKey = 'AIzaSyCrto_gzRkC9hhywRqcu0sDNCjWsKsGnxk';
-
-  final model = GenerativeModel(model: 'gemini-pro', apiKey: 'AIzaSyCrto_gzRkC9hhywRqcu0sDNCjWsKsGnxk');
+  final apiKey = Constants.APIkey;
+  //final GenerativeModel model;
+  //final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey.toString());
+  late final GenerativeModel model;
+  @override
+  void initState() {
+    super.initState();
+    final apiKey = Constants.APIkey;
+    model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey.toString());
+  }
   final List<Message> _messages = [];
   Future<void> sendMessage() async{
     final message = _userInput.text;

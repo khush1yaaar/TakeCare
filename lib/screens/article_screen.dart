@@ -118,15 +118,32 @@ class _ArticleScreenState extends State<ArticleScreen> {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        Image.network(
-                          YoutubePlayer
-                          .getThumbnail(
-                            videoId: YoutubePlayer.convertUrlToId(videoData[widget.article])!,
+                        const Text(
+                          'Beat Procrastination and get you Work Done',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
-                          height: 200,
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(color: Colors.black),
+                              top: BorderSide(color: Colors.black),
+                              left: BorderSide(color: Colors.black),
+                              right: BorderSide(color: Colors.black),
+                            )
+                          ),
+                          child: Image.network(
+                            YoutubePlayer
+                            .getThumbnail(
+                              videoId: YoutubePlayer.convertUrlToId(videoData[widget.article])!,
+                            ),
+                            height: 200,
+                          ),
                         ),
                         const Icon(
-                          Icons.play_arrow,
+                          Icons.play_arrow_rounded,
                           color: Colors.white,
                           size: 40,
                         ),

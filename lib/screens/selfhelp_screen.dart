@@ -22,6 +22,7 @@ class _SelfHelpScreenState extends State<SelfHelpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue.shade50,
       appBar: AppBar(
         leading: GestureDetector(
           onTap: (){
@@ -29,7 +30,7 @@ class _SelfHelpScreenState extends State<SelfHelpScreen> {
           },
           child: const Icon(Icons.arrow_back,color: Colors.white)
         ),
-        title: const Text("If you wouldn't Help Yourself noone will",style: TextStyle(color: Colors.white,fontSize: 17),),
+        title: const Text("If you wouldn't Help Yourself Noone will",style: TextStyle(color: Colors.white,fontSize: 17),),
         backgroundColor: const Color.fromARGB(255, 1, 47, 114),
       ),
       body: Padding(

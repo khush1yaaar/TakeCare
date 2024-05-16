@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
-const kPageViewTextStyle = TextStyle(
+class Constants{
+  final kPageViewTextStyle = TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.w700,
 );
-
-const Api = '';
-
+  static final APIkey = 'AIzaSyCrto_gzRkC9hhywRqcu0sDNCjWsKsGnxk';
+}
 
 //SHA VALUES
 // Enter keystore password:
