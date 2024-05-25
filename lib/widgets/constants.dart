@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
 class Constants{
-  final kPageViewTextStyle = TextStyle(
+  final kPageViewTextStyle = const TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.w700,
 );
-  static final APIkey = 'AIzaSyCrto_gzRkC9hhywRqcu0sDNCjWsKsGnxk';
+  // ignore: constant_identifier_names
+  static const APIkey = 'AIzaSyCrto_gzRkC9hhywRqcu0sDNCjWsKsGnxk';
 }
 
 //SHA VALUES

@@ -24,7 +24,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   void initState() {
     homeScreen = const HomeScreen();
     chatScreen = const ChatScreen();
-    profileScreen = const ProfileScreen();
+    profileScreen = ProfileScreen();
 
     pages = [homeScreen, chatScreen, profileScreen];
     super.initState();

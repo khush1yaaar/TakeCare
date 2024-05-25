@@ -2,9 +2,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:takecare/provider/auth_provider.dart';
-import 'package:takecare/models/user_model.dart';
 import 'package:takecare/widgets/utils.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -115,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () async{
                             //final ap = Provider.of<AuthProvider>(context,listen: false);
                             if(phoneController.text.length == 10){
-                              storeData(Dialogs.userInput.text);
+                              //storeData(Dialogs.userInput.text);
                               _showLoadingDialog(context);
                               sendPhoneNumber();
                               print('called sendPhone Number');
@@ -140,20 +138,23 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-  void storeData(String userInput){
-    final ap = Provider.of<AuthProvider>(context,listen: false);
-    //MapScreenState location = MapScreenState();
-    UserModel userModel = UserModel(
-      phoneNumber: phoneController.text.trim(), 
-      name: userInput,
-      uid: ""
-    );
-    ap.saveUserDataToFirebase(
-      context: context,
-      userModel: userModel,
-      OnSuccess: (){}
-    );
-  }
+  // void storeData(String userInput){
+  //   final ap = Provider.of<AuthProvider>(context,listen: false);
+  //   //MapScreenState location = MapScreenState();
+  //   UserModel userModel = UserModel(
+  //     phoneNumber: phoneController.text.trim(), 
+  //     name: userInput,
+  //     uid: '',
+  //     email: '',
+  //     bio: '',
+  //     profilePic: ''
+  //   );
+  //   // ap.saveUserDataToFirebase(
+  //   //   context: context,
+  //   //   userModel: userModel,
+  //   //   OnSuccess: (){}
+  //   // );
+  // }
   void sendPhoneNumber(){
     final ap = Provider.of<AuthProvider>(context,listen: false);
     String phoneNumber = phoneController.text.trim();

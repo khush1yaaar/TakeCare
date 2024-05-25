@@ -1,10 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:takecare/screens/article_screen.dart';
 import 'package:takecare/screens/assessment_screen.dart';
 import 'package:takecare/screens/selfhelp_screen.dart';
-import 'package:takecare/widgets/utils.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -16,19 +16,34 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late Future<DocumentSnapshot<Map<String, dynamic>>> _nameFuture;
+  @override
+  void initState() {
+    // TODO: implement initState
+    _nameFuture = _fetchName();
+    super.initState();
+  }
+  Future<DocumentSnapshot<Map<String, dynamic>>> _fetchName() async {
+    // Replace 'procrastination' with the document ID you want to fetch
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc('name')
+        .get();
+  }
   @override
   Widget build(BuildContext context) {
-    String name = '';
+    
     return Scaffold(
       backgroundColor: Colors.blue.shade50,
       appBar: AppBar(
         title: GestureDetector(
           onTap: (){
-           name = _nameInputPopUp(context);
+           //_nameInputPopUp(context);
           },
-          child: Text(name.length == 0?
-            'Hello, There!':'Hello, $name',
-            style: TextStyle(color: Colors.white),)
+          // ignore: unnecessary_null_comparison
+          child: Text(_nameFuture != null?
+            'Hello, There!':'Hello, $_nameFuture',
+            style: const  TextStyle(color: Colors.white),)
         ),
         backgroundColor: Color.fromARGB(255, 1, 47, 114),
       ),
@@ -332,11 +347,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-  }
-  String _nameInputPopUp(BuildContext context) {
-    //Dialogs dialog = Dialogs();
-    Dialogs.inputDialog(context, 'Entre Your Name');
-    String name = Dialogs.userInput.text;
-    return name;
   }
 }
