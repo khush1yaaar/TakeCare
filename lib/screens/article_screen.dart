@@ -118,13 +118,6 @@ class _ArticleScreenState extends State<ArticleScreen> {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        const Text(
-                          'Beat Procrastination and get you Work Done',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
                         Container(
                           decoration: const BoxDecoration(
                             border: Border(
