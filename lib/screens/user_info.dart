@@ -1,9 +1,5 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:takecare/models/user_model.dart';
@@ -101,75 +97,38 @@ class _UserInfoState extends State<UserInfo> {
   void _showLoadingDialog(BuildContext context) {
     Dialogs.showLoadingDialog(context, 'Saving Your Data...');
   }
-  // void storeData(BuildContext context){
-  //   _showLoadingDialog(context);
-  //   final ap = Provider.of<AuthProvider>(context,listen: false);
-  //   UserModel userModel = UserModel(
-  //     phoneNumber: '', 
-  //     name: nameController.text.trim(),
-  //     bio: bioController.text.trim(),
-  //     uid: "",
-  //     email: emailController.text,
-  //     profilePic: ''
-  //   );
-  //   // ap.saveUserDataToFirebase(
-  //   //   context: context,
-  //   //   userModel: userModel,
-  //   //   OnSuccess: (){}
-  //   // );
-  //   if(image != null){
-  //     ap.saveUserDataToFirebase(
-  //       context: context, 
-  //       userModel: userModel, 
-  //       profilePic: image!,
-  //       OnSuccess: () {
-  //         ap.saveUserDataToSP().then((value) {
-  //           Navigator.of(context, rootNavigator: true).pop();
-  //           Navigator.pushReplacement(
-  //             context, 
-  //             MaterialPageRoute(builder: (context) => const BottomNavBar())
-  //           );
-  //         });
-  //       }
-  //     );
-  //   }
-  //   else{
-  //     Navigator.of(context, rootNavigator: true).pop();
-  //     showSnackbar(context, "please set a profile....");
-  //   }
-  // }
-
   void storeData(BuildContext context){
-  _showLoadingDialog(context); // <- Dialog shown here
-  final ap = Provider.of<AuthProvider>(context,listen: false);
-  UserModel userModel = UserModel(
-    phoneNumber: '', 
-    name: nameController.text.trim(),
-    bio: bioController.text.trim(),
-    uid: "",
-    email: emailController.text,
-    profilePic: ''
-  );
-  if(image != null){
-    ap.saveUserDataToFirebase(
-      context: context, 
-      userModel: userModel, 
-      profilePic: image!,
-      OnSuccess: () {
-        ap.saveUserDataToSP().then((value) {
-          Navigator.pushReplacement(
-            context, 
-            MaterialPageRoute(builder: (context) => const BottomNavBar())
-          );
-        });
-      }
+    _showLoadingDialog(context);
+    final ap = Provider.of<AuthProvider>(context,listen: false);
+    UserModel userModel = UserModel(
+      name: nameController.text.trim(),
+      bio: bioController.text.trim(),
+      email: emailController.text.trim(),
+      phoneNumber: '', 
+      uid: '',
+      profilePic: ''
     );
-  } else {
-    // This should close the dialog if there's no image, but it's not enough
-    Navigator.of(context, rootNavigator: true).pop();
-    showSnackbar(context, "please set a profile....");
+    if(image != null){
+      ap.saveUserDataToFirebase(
+        context: context, 
+        userModel: userModel, 
+        profilePic: image!,
+        OnSuccess: () {
+          ap.saveUserDataToSP().then((value) {
+            ap.setSignIn().then((value) {
+              Navigator.pushReplacement(
+                context, 
+                MaterialPageRoute(builder: (context) => BottomNavBar())
+              );
+            });
+          });
+        }
+      );
+    }
+    else{
+      showSnackbar(context, "please set a profile....");
+    }
   }
-}
 
   Widget textField({
     required String hintText,

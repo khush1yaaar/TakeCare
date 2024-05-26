@@ -113,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () async{
                             //final ap = Provider.of<AuthProvider>(context,listen: false);
                             if(phoneController.text.length == 10){
-                              //storeData(Dialogs.userInput.text);
+                              //storeData();
                               _showLoadingDialog(context);
                               sendPhoneNumber();
                               print('called sendPhone Number');
@@ -138,22 +138,23 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-  // void storeData(String userInput){
+  // void storeData(){
   //   final ap = Provider.of<AuthProvider>(context,listen: false);
   //   //MapScreenState location = MapScreenState();
   //   UserModel userModel = UserModel(
   //     phoneNumber: phoneController.text.trim(), 
-  //     name: userInput,
+  //     name: '',
   //     uid: '',
   //     email: '',
   //     bio: '',
   //     profilePic: ''
   //   );
-  //   // ap.saveUserDataToFirebase(
-  //   //   context: context,
-  //   //   userModel: userModel,
-  //   //   OnSuccess: (){}
-  //   // );
+  //   ap.saveUserDataToFirebase(
+  //     context: context,
+  //     userModel: userModel,
+  //     profilePic: File(''),
+  //     OnSuccess: (){}
+  //   );
   // }
   void sendPhoneNumber(){
     final ap = Provider.of<AuthProvider>(context,listen: false);

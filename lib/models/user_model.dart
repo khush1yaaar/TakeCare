@@ -4,7 +4,7 @@ class UserModel{
   String uid;
   String email;
   String bio;
-  String profilePic;
+  String? profilePic;
 
   UserModel({
   required this.phoneNumber,
