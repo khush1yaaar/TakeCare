@@ -36,6 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.blue.shade50,
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.arrow_back,color: Colors.white)
+        ),
         title: GestureDetector(
           onTap: (){
            //_nameInputPopUp(context);
@@ -45,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
             'Hello, There!':'Hello, $_nameFuture',
             style: const  TextStyle(color: Colors.white),)
         ),
-        backgroundColor: Color.fromARGB(255, 1, 47, 114),
+        backgroundColor: Color.fromARGB(255, 15, 75, 165),
       ),
       body: SingleChildScrollView(
         child: Column(

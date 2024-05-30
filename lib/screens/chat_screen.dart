@@ -52,7 +52,13 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 1, 47, 114),
+        backgroundColor: Color.fromARGB(255, 15, 75, 165),
+        leading: GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.arrow_back,color: Colors.white)
+        ),
         title: const Text(
           'AI to your Rescue',
           style: TextStyle(

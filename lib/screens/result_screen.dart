@@ -11,14 +11,21 @@ class Result extends StatefulWidget {
 class _ResultState extends State<Result> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.blue,
+    return Scaffold(
+      backgroundColor: Colors.blue.shade100,
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 15, 75, 165),
+        title: const Text('See Your Results'),
+      ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text('Mild Anxiety'),
-            Text('Suggestion what to do next'),
-          ],
+        child: Center(
+          child: Column(
+            children: [
+              Text('${widget.result}'),
+              const Text('Mild Anxiety'),
+              const Text('Suggestion what to do next'),
+            ],
+          ),
         ),
       ),
     );

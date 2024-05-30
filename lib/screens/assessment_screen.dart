@@ -23,7 +23,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           child: Icon(Icons.arrow_back,color: Colors.white)
         ),
         title: const Text('Time to know YourSelf better',style: TextStyle(color: Colors.white),),
-        backgroundColor: const Color.fromARGB(255, 1, 47, 114),
+        backgroundColor: Color.fromARGB(255, 15, 75, 165),
       ),
       body: SingleChildScrollView(
         child: Column(

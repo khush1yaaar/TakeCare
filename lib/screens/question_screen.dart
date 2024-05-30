@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:takecare/screens/result_screen.dart';
 
 // ignore: must_be_immutable
 class Question extends StatefulWidget {
@@ -13,7 +16,9 @@ class Question extends StatefulWidget {
 
 class _QuestionState extends State<Question> {
   late Future<DocumentSnapshot<Map<String, dynamic>>> _questionFuture;
-
+  int ans = 0;
+  int index = 0;
+  int result = 0;
   @override
   void initState() {
     super.initState();
@@ -31,9 +36,18 @@ class _QuestionState extends State<Question> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue.shade100,
       appBar: AppBar(
-        title: const  Text('Self Assessment'),
+        leading: GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.arrow_back,color: Colors.white)
+        ),
+        backgroundColor: Color.fromARGB(255, 15, 75, 165),
+        title: const  Text('Self Assessment',style: TextStyle(color: Colors.white),),
       ),
+      //--------------------------FETCHING QUESTIONS FROM DATABASE-----------------------------------
       body: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         future: _questionFuture,
         builder: (context, snapshot) {
@@ -52,31 +66,144 @@ class _QuestionState extends State<Question> {
             }
             List<Widget> questionWidgets = data.entries.map((entry) {
               return Column(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    entry.key,
-                    style: const TextStyle(color: Colors.black, fontSize: 18),
+                  Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0)
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          '${index+1}',
+                          style: const TextStyle(color: Colors.black, fontSize: 25),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Flexible(
+                          child: Text(
+                            entry.value.toString(),
+                            style: const TextStyle(color: Colors.black, fontSize: 20),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                      ],
+                    ),
                   ),
-                  Text(
-                    entry.value.toString(),
-                    style: const TextStyle(color: Colors.black, fontSize: 15),
+                  const SizedBox(
+                    height: 50,
                   ),
-                  const SizedBox(height: 10),
+                  //---------------------- OPTIONS --------------------------
+                  SizedBox(
+                    height: 40,
+                    width: 350,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ans = 0;
+                      }, 
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                      ),
+                      child: const Text('Not at All',style: TextStyle(color: Colors.white,fontSize: 20),),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  SizedBox(
+                    height: 40,
+                    width: 350,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ans = 1;
+                      }, 
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                      ),
+                      child: const Text('Several Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  SizedBox(
+                    height: 40,
+                    width: 350,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ans = 2;
+                      }, 
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                      ),
+                      child: const Text('More than half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  SizedBox(
+                    height: 40,
+                    width: 350,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ans = 3;
+                      }, 
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                      ),
+                      child: const Text('Nearly Half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 170,left: 200),
+                    child: SizedBox(
+                      height: 70,
+                      width: 100,
+                      child: FloatingActionButton(
+                        backgroundColor: Colors.blue,
+                        onPressed: () {
+                          _movedToNextScreen();
+                        },
+                        child: const Text('Next Question',style: TextStyle(color: Colors.white),),
+                      ),
+                    ),
+                  )
                 ],
               );
             }).toList();
 
             return SingleChildScrollView(
-              child: Column(
-                children: [
-                  questionWidgets[0],
-
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    questionWidgets[index],
+                  ],
+                ),
               ),
             );
           }
         },
       ),
     );
+  }
+  void _movedToNextScreen() {
+    if(index < 6) {
+      result = result + ans;
+      index = index + 1;
+    }
+    else {
+      Navigator.pushReplacement(
+        context, 
+        MaterialPageRoute(builder: ((context) => Result(result: result)))
+      );
+    }
   }
 }

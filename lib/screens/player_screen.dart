@@ -31,7 +31,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
             YoutubePlayer(
               controller: _controller,
             ),
-            Text('data'),
           ],
         ),
       ),
