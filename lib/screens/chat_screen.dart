@@ -55,9 +55,9 @@ class _ChatScreenState extends State<ChatScreen> {
         backgroundColor: Color.fromARGB(255, 15, 75, 165),
         leading: GestureDetector(
           onTap: (){
-            Navigator.pop(context);
+            //Navigator.pop(context);
           },
-          child: Icon(Icons.arrow_back,color: Colors.white)
+          child: Icon(Icons.arrow_back,color: Color.fromARGB(255, 15, 75, 165))
         ),
         title: const Text(
           'AI to your Rescue',
