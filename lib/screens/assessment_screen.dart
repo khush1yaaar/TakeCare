@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:takecare/screens/question_screen.dart';
 
 // ignore: must_be_immutable
@@ -59,23 +61,31 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                       child: const Center(child: Text('Anxiety',style: TextStyle(color: Colors.white,fontSize: 40),)),
                     ),
                   ),
-                ),Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    height: 130,
-                    width: 170,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 8, 80, 152),
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 15,
-                        blurStyle: BlurStyle.solid,
-                        color: Colors.blueGrey
-                      )
-                    ]
+                ),GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context)=> Question(keyword: "panickattack",))
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      height: 130,
+                      width: 170,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 8, 80, 152),
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: const [
+                        BoxShadow(
+                          blurRadius: 15,
+                          blurStyle: BlurStyle.solid,
+                          color: Colors.blueGrey
+                        )
+                      ]
+                      ),
+                      child: const Center(child: Text('  Panick    \n   Attack',style: TextStyle(color: Colors.white,fontSize: 35),)),
                     ),
-                    child: const Center(child: Text('  Panick    \n   Attack',style: TextStyle(color: Colors.white,fontSize: 35),)),
                   ),
                 ),
               ],
@@ -83,23 +93,31 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    height: 130,
-                    width: 170,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 8, 80, 152),
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 15,
-                        blurStyle: BlurStyle.solid,
-                        color: Colors.blueGrey
-                      )
-                    ]
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context)=> Question(keyword: "depression",))
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      height: 130,
+                      width: 170,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 8, 80, 152),
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: const [
+                        BoxShadow(
+                          blurRadius: 15,
+                          blurStyle: BlurStyle.solid,
+                          color: Colors.blueGrey
+                        )
+                      ]
+                      ),
+                      child: const Center(child: Text('Depression',style: TextStyle(color: Colors.white,fontSize: 30),)),
                     ),
-                    child: const Center(child: Text('Depression',style: TextStyle(color: Colors.white,fontSize: 30),)),
                   ),
                 ),Padding(
                   padding: const EdgeInsets.all(10.0),

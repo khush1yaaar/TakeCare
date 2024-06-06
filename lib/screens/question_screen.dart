@@ -196,13 +196,16 @@ class _QuestionState extends State<Question> {
   }
   void _movedToNextScreen() {
     if(index < 6) {
-      result = result + ans;
-      index = index + 1;
+      setState(() {
+        result = result + ans;
+        index = index + 1;
+        _questionFuture = _fetchQuestion(); // Re-fetch the next question
+      });
     }
     else {
       Navigator.pushReplacement(
         context, 
-        MaterialPageRoute(builder: ((context) => Result(result: result)))
+        MaterialPageRoute(builder: ((context) => Result(result: result,keyword : widget.keyword)))
       );
     }
   }

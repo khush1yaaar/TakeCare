@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class Result extends StatefulWidget {
   final int result;
-  const Result({super.key,required this.result});
+  final String keyword;
+  const Result({super.key,required this.result, required this.keyword});
 
   @override
   State<Result> createState() => _ResultState();
@@ -15,19 +16,34 @@ class _ResultState extends State<Result> {
       backgroundColor: Colors.blue.shade100,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 15, 75, 165),
-        title: const Text('See Your Results'),
+        title: const Text(
+          'See Your Results',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
-              Text('${widget.result}'),
-              const Text('Mild Anxiety'),
-              const Text('Suggestion what to do next'),
+              Text(
+                '${widget.keyword} Test Results',
+                style: const TextStyle(
+                  fontSize: 40,
+                  color: Colors.white,
+                ),
+              ), 
+              Text('Your score : ${widget.result}'),
+              Text(
+                showResult(widget.result, widget.keyword)
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+  String showResult(int result, String keyword) {
+    
+    return "";
   }
 }
