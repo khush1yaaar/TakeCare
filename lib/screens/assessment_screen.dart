@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:takecare/screens/question_screen.dart';
+import 'package:takecare/screens/Test%20Screens/adhd_test.dart';
+import 'package:takecare/screens/Test%20Screens/anxiety_test.dart';
+import 'package:takecare/screens/Test%20Screens/depression_test.dart';
 
 // ignore: must_be_immutable
 class AssessmentScreen extends StatefulWidget {
@@ -39,7 +41,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   onTap: (){
                     Navigator.push(
                       context, 
-                      MaterialPageRoute(builder: (context)=> Question(keyword: "anxiety",))
+                      MaterialPageRoute(builder: (context)=> AnxietyTest(keyword: "anxiety",))
                     );
                   },
                   child: Padding(
@@ -65,7 +67,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   onTap: (){
                     Navigator.push(
                       context, 
-                      MaterialPageRoute(builder: (context)=> Question(keyword: "panickattack",))
+                      MaterialPageRoute(builder: (context)=> ADHDTest(keyword: "adhd",))
                     );
                   },
                   child: Padding(
@@ -97,7 +99,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   onTap: (){
                     Navigator.push(
                       context, 
-                      MaterialPageRoute(builder: (context)=> Question(keyword: "depression",))
+                      MaterialPageRoute(builder: (context)=> DepressionTest(keyword: "depression",))
                     );
                   },
                   child: Padding(

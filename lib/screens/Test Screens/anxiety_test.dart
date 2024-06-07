@@ -5,16 +5,16 @@ import 'package:flutter/widgets.dart';
 import 'package:takecare/screens/result_screen.dart';
 
 // ignore: must_be_immutable
-class Question extends StatefulWidget {
+class AnxietyTest extends StatefulWidget {
   String keyword;
 
-  Question({super.key, required this.keyword});
+  AnxietyTest({super.key, required this.keyword});
 
   @override
-  State<Question> createState() => _QuestionState();
+  State<AnxietyTest> createState() => _AnxietyTestState();
 }
 
-class _QuestionState extends State<Question> {
+class _AnxietyTestState extends State<AnxietyTest> {
   late Future<DocumentSnapshot<Map<String, dynamic>>> _questionFuture;
   int ans = 0;
   int index = 0;
