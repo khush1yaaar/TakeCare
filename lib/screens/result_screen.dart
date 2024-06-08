@@ -75,6 +75,10 @@ class _ResultState extends State<Result> {
         level = bipolarResult(result);
       } break; 
       
+      case "parenttest": { 
+        level = bipolarResult(result);
+      } break; 
+
       default: { 
         level = "Not defined"; 
       } break; 
