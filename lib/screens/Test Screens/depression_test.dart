@@ -195,7 +195,7 @@ class _DepressionTestState extends State<DepressionTest> {
     );
   }
   void _movedToNextScreen() {
-    if(index < 6) {
+    if(index < 9) {
       setState(() {
         result = result + ans;
         index = index + 1;

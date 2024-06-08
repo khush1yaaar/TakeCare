@@ -16,6 +16,12 @@ class _ResultState extends State<Result> {
       backgroundColor: Colors.blue.shade100,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 15, 75, 165),
+        leading: GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.arrow_back,color: Colors.white)
+        ),
         title: const Text(
           'See Your Results',
           style: TextStyle(color: Colors.white),

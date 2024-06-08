@@ -5,16 +5,16 @@ import 'package:flutter/widgets.dart';
 import 'package:takecare/screens/result_screen.dart';
 
 // ignore: must_be_immutable
-class ADHDTest extends StatefulWidget {
+class PTSDTest extends StatefulWidget {
   String keyword;
 
-  ADHDTest({super.key, required this.keyword});
+  PTSDTest({super.key, required this.keyword});
 
   @override
-  State<ADHDTest> createState() => _ADHDTestState();
+  State<PTSDTest> createState() => _PTSDTestState();
 }
 
-class _ADHDTestState extends State<ADHDTest> {
+class _PTSDTestState extends State<PTSDTest> {
   late Future<DocumentSnapshot<Map<String, dynamic>>> _questionFuture;
   int ans = 0;
   int index = 0;
@@ -103,28 +103,12 @@ class _ADHDTestState extends State<ADHDTest> {
                     width: 350,
                     child: ElevatedButton(
                       onPressed: () {
-                        ans = 0;
-                      }, 
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                      ),
-                      child: const Text('Not at All',style: TextStyle(color: Colors.white,fontSize: 20),),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  SizedBox(
-                    height: 40,
-                    width: 350,
-                    child: ElevatedButton(
-                      onPressed: () {
                         ans = 1;
                       }, 
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Colors.blue),
                       ),
-                      child: const Text('Several Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('Yes',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
@@ -135,29 +119,16 @@ class _ADHDTestState extends State<ADHDTest> {
                     width: 350,
                     child: ElevatedButton(
                       onPressed: () {
-                        ans = 2;
+                        ans = 0;
                       }, 
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Colors.blue),
                       ),
-                      child: const Text('More than half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('No',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
                     height: 50,
-                  ),
-                  SizedBox(
-                    height: 40,
-                    width: 350,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        ans = 3;
-                      }, 
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                      ),
-                      child: const Text('Nearly Half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
-                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 170,left: 200),

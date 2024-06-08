@@ -5,16 +5,16 @@ import 'package:flutter/widgets.dart';
 import 'package:takecare/screens/result_screen.dart';
 
 // ignore: must_be_immutable
-class ADHDTest extends StatefulWidget {
+class AnxietyTest extends StatefulWidget {
   String keyword;
 
-  ADHDTest({super.key, required this.keyword});
+  AnxietyTest({super.key, required this.keyword});
 
   @override
-  State<ADHDTest> createState() => _ADHDTestState();
+  State<AnxietyTest> createState() => _AnxietyTestState();
 }
 
-class _ADHDTestState extends State<ADHDTest> {
+class _AnxietyTestState extends State<AnxietyTest> {
   late Future<DocumentSnapshot<Map<String, dynamic>>> _questionFuture;
   int ans = 0;
   int index = 0;
@@ -108,7 +108,7 @@ class _ADHDTestState extends State<ADHDTest> {
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Colors.blue),
                       ),
-                      child: const Text('Not at All',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('Never',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
@@ -124,7 +124,7 @@ class _ADHDTestState extends State<ADHDTest> {
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Colors.blue),
                       ),
-                      child: const Text('Several Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('Some Times',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
@@ -140,24 +140,11 @@ class _ADHDTestState extends State<ADHDTest> {
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Colors.blue),
                       ),
-                      child: const Text('More than half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('Often',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
                     height: 50,
-                  ),
-                  SizedBox(
-                    height: 40,
-                    width: 350,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        ans = 3;
-                      }, 
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                      ),
-                      child: const Text('Nearly Half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
-                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 170,left: 200),
@@ -195,7 +182,7 @@ class _ADHDTestState extends State<ADHDTest> {
     );
   }
   void _movedToNextScreen() {
-    if(index < 17) {
+    if(index < 6) {
       setState(() {
         result = result + ans;
         index = index + 1;
