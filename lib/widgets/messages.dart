@@ -26,7 +26,7 @@ class Messages extends StatelessWidget {
         right: isUser ? 10: 100
       ),
       decoration: BoxDecoration(
-        color: isUser ? Colors.blue.shade300 : const Color.fromARGB(174, 189, 189, 189),
+        color: isUser ? Color.fromARGB(255, 118, 207, 235) : const Color.fromARGB(174, 189, 189, 189),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10),
           bottomLeft: isUser ? Radius.circular(10): Radius.zero,

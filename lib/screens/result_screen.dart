@@ -34,11 +34,13 @@ class _ResultState extends State<Result> {
               const SizedBox(
                 height: 30,
               ),
-              Text(
-                '${widget.keyword.toString().toUpperCase()} Test Results',
-                style: const TextStyle(
-                  fontSize: 40,
-                  color: Colors.white,
+              Center(
+                child: Text(
+                  '${widget.keyword.toString().toUpperCase()} Test Results',
+                  style: const TextStyle(
+                    fontSize: 30,
+                    color: Colors.black,
+                  ),
                 ),
               ), 
               const SizedBox(
@@ -46,15 +48,18 @@ class _ResultState extends State<Result> {
               ),
               Text(
                 'Your score : ${widget.result.toString().toUpperCase()}',
-                style: TextStyle(
-
+                style: const TextStyle(
+                  fontSize: 20
                 ),
               ),
               const SizedBox(
                 height: 30,
               ),
               Text(
-                showResult(widget.result, widget.keyword)
+                showResult(widget.result, widget.keyword),
+                style: TextStyle(
+                  fontSize: 30
+                ),
               ),
             ],
           ),
@@ -81,10 +86,6 @@ class _ResultState extends State<Result> {
         level = ptsdResult(result);
       } break; 
       
-      case "eatingdisorder": { 
-        level = eatingdisorderResult(result);
-      } break;
-
       case "bipolar": { 
         level = bipolarResult(result);
       } break; 
@@ -158,33 +159,11 @@ class _ResultState extends State<Result> {
   }
   String bipolarResult(int result) {
     String level;
-    if(result > 14) {
-      level = "Severe Anxiety";
-    }
-    else if (result > 9) {
-      level = "Moderate Anxiety";
-    }
-    else if ( result > 4) {
-      level = "Mild Anxiety";
+    if(result > 7) {
+      level = "BiPolar Positive";
     }
     else {
-      level = "Minimal Anxiety";
-    }
-    return level;
-  }
-  String eatingdisorderResult(int result) {
-    String level;
-    if(result > 14) {
-      level = "Severe Anxiety";
-    }
-    else if (result > 9) {
-      level = "Moderate Anxiety";
-    }
-    else if ( result > 4) {
-      level = "Mild Anxiety";
-    }
-    else {
-      level = "Minimal Anxiety";
+      level = "BiPolar Negative";
     }
     return level;
   }

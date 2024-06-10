@@ -115,7 +115,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: BorderSide(
-                            color: Colors.blue.shade700, 
+                            color: Color.fromARGB(255, 49, 162, 197), 
                             style: BorderStyle.solid,
                             width: 1.5,
                           ),
@@ -125,9 +125,12 @@ class _ChatScreenState extends State<ChatScreen> {
                           borderSide: const BorderSide(
                             color: Colors.black,
                             style: BorderStyle.solid
-                          )
+                          ),
                         ),
-                        label: const Text('Ask Anything')
+                        label: const Text('Ask Anything'),
+                        floatingLabelStyle: TextStyle(
+                            color: Color.fromARGB(255, 49, 162, 197),
+                        ),
                       ),
                     ),
                   ),

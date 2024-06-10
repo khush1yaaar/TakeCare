@@ -166,7 +166,7 @@ class _BiPolarTestState extends State<BiPolarTest> {
     );
   }
   void _movedToNextScreen() {
-    if(index < 13) {
+    if(index < 12) {
       setState(() {
         result = result + ans;
         index = index + 1;

@@ -203,7 +203,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                 //backgroundImage: AssetImage('lib/images/family.png',),
                 child: _image == null
                     ? _profilePicUrl == null
-                        ? const Icon(Icons.person, size: 40, color: Colors.grey)
+                        ? const Icon(Icons.person, size: 80, color: Colors.white)
                         : ClipOval(
                             child: Image.network(
                               _profilePicUrl!,

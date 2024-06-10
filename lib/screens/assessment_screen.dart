@@ -211,44 +211,44 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: (){
-                Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context)=> PTSDTest(keyword: "parenttest",))
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: 120,
-                  width: 370,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 49, 162, 197),
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 15,
-                        blurStyle: BlurStyle.solid,
-                        color: Colors.blueGrey
-                      )
-                    ]
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Center(
-                      child: Text(
-                        'Parent Test: Your Child’s Mental Health',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 40,
-                        ),
-                      )
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: (){
+            //     Navigator.push(
+            //       context, 
+            //       MaterialPageRoute(builder: (context)=> PTSDTest(keyword: "parenttest",))
+            //     );
+            //   },
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(10.0),
+            //     child: Container(
+            //       height: 120,
+            //       width: 370,
+            //       decoration: BoxDecoration(
+            //         color: const Color.fromARGB(255, 49, 162, 197),
+            //         borderRadius: BorderRadius.circular(15),
+            //         boxShadow: const [
+            //           BoxShadow(
+            //             blurRadius: 15,
+            //             blurStyle: BlurStyle.solid,
+            //             color: Colors.blueGrey
+            //           )
+            //         ]
+            //       ),
+            //       child: const Padding(
+            //         padding: EdgeInsets.only(left: 10),
+            //         child: Center(
+            //           child: Text(
+            //             'Parent Test: Your Child’s Mental Health',
+            //             style: TextStyle(
+            //               color: Colors.white,
+            //               fontSize: 40,
+            //             ),
+            //           )
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
 
           ],
         ),
