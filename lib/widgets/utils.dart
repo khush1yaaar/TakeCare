@@ -66,7 +66,7 @@ class Dialogs {
         return AlertDialog(
           content: Row(
             children: <Widget>[
-              CircularProgressIndicator(color: Colors.blue.shade400,),
+              CircularProgressIndicator(color: Color.fromARGB(255, 49, 162, 197)),
               const SizedBox(width: 20),
               Text(message),
             ],

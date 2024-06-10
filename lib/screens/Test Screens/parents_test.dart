@@ -44,7 +44,7 @@ class _AnxietyTestState extends State<AnxietyTest> {
           },
           child: Icon(Icons.arrow_back,color: Colors.white)
         ),
-        backgroundColor: Color.fromARGB(255, 15, 75, 165),
+        backgroundColor: Color.fromARGB(255, 49, 162, 197),
         title: const  Text('Self Assessment',style: TextStyle(color: Colors.white),),
       ),
       //--------------------------FETCHING QUESTIONS FROM DATABASE-----------------------------------
@@ -106,7 +106,7 @@ class _AnxietyTestState extends State<AnxietyTest> {
                         ans = 0;
                       }, 
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
                       child: const Text('Never',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
@@ -122,7 +122,7 @@ class _AnxietyTestState extends State<AnxietyTest> {
                         ans = 1;
                       }, 
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
                       child: const Text('Some Times',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
@@ -138,7 +138,7 @@ class _AnxietyTestState extends State<AnxietyTest> {
                         ans = 2;
                       }, 
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
                       child: const Text('Often',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
@@ -152,7 +152,7 @@ class _AnxietyTestState extends State<AnxietyTest> {
                       height: 70,
                       width: 100,
                       child: FloatingActionButton(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Color.fromARGB(255, 49, 162, 196),
                         onPressed: () {
                           _movedToNextScreen();
                         },

@@ -42,8 +42,10 @@ class _ArticleScreenState extends State<ArticleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 200, 236, 247),
       appBar: AppBar(
         title: Text(widget.article),
+        backgroundColor: Color.fromARGB(255, 49, 162, 197),
       ),
       body: FutureBuilder(
         future: Future.wait([_articleFuture, _videoFuture]),

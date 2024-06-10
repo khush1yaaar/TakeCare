@@ -138,24 +138,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-  // void storeData(){
-  //   final ap = Provider.of<AuthProvider>(context,listen: false);
-  //   //MapScreenState location = MapScreenState();
-  //   UserModel userModel = UserModel(
-  //     phoneNumber: phoneController.text.trim(), 
-  //     name: '',
-  //     uid: '',
-  //     email: '',
-  //     bio: '',
-  //     profilePic: ''
-  //   );
-  //   ap.saveUserDataToFirebase(
-  //     context: context,
-  //     userModel: userModel,
-  //     profilePic: File(''),
-  //     OnSuccess: (){}
-  //   );
-  // }
   void sendPhoneNumber(){
     final ap = Provider.of<AuthProvider>(context,listen: false);
     String phoneNumber = phoneController.text.trim();

@@ -52,12 +52,12 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 15, 75, 165),
+        backgroundColor: Color.fromARGB(255, 49, 162, 197),
         leading: GestureDetector(
           onTap: (){
             //Navigator.pop(context);
           },
-          child: Icon(Icons.arrow_back,color: Color.fromARGB(255, 15, 75, 165))
+          child: Icon(Icons.arrow_back,color: const Color.fromRGBO(26, 33, 48,0))
         ),
         title: const Text(
           'AI to your Rescue',
@@ -107,7 +107,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   Expanded(
                     flex: 15,
                     child: TextFormField(
-                      style: const TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Color.fromARGB(255, 19, 17, 17)),
                       controller: _userInput,
                       decoration: InputDecoration(
                         focusColor: Colors.black,

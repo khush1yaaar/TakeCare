@@ -186,10 +186,10 @@ class _ProfileScreen extends State<ProfileScreen> {
           onTap: (){
             //Navigator.pop(context);
           },
-          child: Icon(Icons.arrow_back,color: Color.fromARGB(255, 15, 75, 165))
+          child: Icon(Icons.arrow_back,color: Color.fromARGB(255, 49, 162, 197))
         ),
         title: const Text('Profile Screen',style: TextStyle(color: Colors.white),),
-        backgroundColor: const Color.fromARGB(255, 15, 75, 165),
+        backgroundColor: Color.fromARGB(255, 49, 162, 197),
       ),
       body: Center(
         child: Column(
@@ -199,7 +199,7 @@ class _ProfileScreen extends State<ProfileScreen> {
               onTap: _pickImage,
               child: CircleAvatar(
                 radius: 115,
-                backgroundColor: Colors.blue.shade900,
+                backgroundColor: Color.fromARGB(255, 49, 162, 197),
                 //backgroundImage: AssetImage('lib/images/family.png',),
                 child: _image == null
                     ? _profilePicUrl == null
@@ -252,7 +252,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                 Provider.of<takecare_auth.AuthProvider>(context, listen: false).signOut(context);
               },
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.blue.shade900),
+                backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 197)),
               ),
               child: Text(
                 'Sign out',

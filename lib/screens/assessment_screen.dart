@@ -29,7 +29,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           child: Icon(Icons.arrow_back,color: Colors.white)
         ),
         title: const Text('Time to know YourSelf better',style: TextStyle(color: Colors.white),),
-        backgroundColor: Color.fromARGB(255, 15, 75, 165),
+        backgroundColor: Color.fromARGB(255, 49, 162, 197),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -49,7 +49,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   height: 120,
                   width: 370,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 8, 80, 152),
+                    color: const Color.fromARGB(255, 49, 162, 197),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(
@@ -84,7 +84,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   height: 120,
                   width: 370,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 8, 80, 152),
+                    color: const Color.fromARGB(255, 49, 162, 197),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(
@@ -119,7 +119,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   height: 120,
                   width: 370,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 8, 80, 152),
+                    color: const Color.fromARGB(255, 49, 162, 197),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(
@@ -154,7 +154,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   height: 120,
                   width: 370,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 8, 80, 152),
+                    color: const Color.fromARGB(255, 49, 162, 197),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(
@@ -189,7 +189,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   height: 120,
                   width: 370,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 8, 80, 152),
+                    color: const Color.fromARGB(255, 49, 162, 197),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(
@@ -224,7 +224,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   height: 120,
                   width: 370,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 8, 80, 152),
+                    color: const Color.fromARGB(255, 49, 162, 197),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(

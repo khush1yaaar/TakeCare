@@ -44,7 +44,7 @@ class _DepressionTestState extends State<DepressionTest> {
           },
           child: Icon(Icons.arrow_back,color: Colors.white)
         ),
-        backgroundColor: Color.fromARGB(255, 15, 75, 165),
+        backgroundColor: Color.fromARGB(255, 49, 162, 197),
         title: const  Text('Self Assessment',style: TextStyle(color: Colors.white),),
       ),
       //--------------------------FETCHING QUESTIONS FROM DATABASE-----------------------------------
@@ -106,7 +106,7 @@ class _DepressionTestState extends State<DepressionTest> {
                         ans = 0;
                       }, 
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
                       child: const Text('Not at All',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
@@ -122,7 +122,7 @@ class _DepressionTestState extends State<DepressionTest> {
                         ans = 1;
                       }, 
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
                       child: const Text('Several Days',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
@@ -138,7 +138,7 @@ class _DepressionTestState extends State<DepressionTest> {
                         ans = 2;
                       }, 
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
                       child: const Text('More than half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
@@ -154,7 +154,7 @@ class _DepressionTestState extends State<DepressionTest> {
                         ans = 3;
                       }, 
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
                       child: const Text('Nearly Half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
@@ -165,7 +165,7 @@ class _DepressionTestState extends State<DepressionTest> {
                       height: 70,
                       width: 100,
                       child: FloatingActionButton(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Color.fromARGB(255, 49, 162, 196),
                         onPressed: () {
                           _movedToNextScreen();
                         },

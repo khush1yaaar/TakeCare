@@ -36,7 +36,7 @@ class _ADHDTestState extends State<ADHDTest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade100,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: GestureDetector(
           onTap: (){
@@ -44,7 +44,7 @@ class _ADHDTestState extends State<ADHDTest> {
           },
           child: Icon(Icons.arrow_back,color: Colors.white)
         ),
-        backgroundColor: Color.fromARGB(255, 15, 75, 165),
+        backgroundColor: Color.fromARGB(255, 49, 162, 197),
         title: const  Text('Self Assessment',style: TextStyle(color: Colors.white),),
       ),
       //--------------------------FETCHING QUESTIONS FROM DATABASE-----------------------------------
@@ -72,7 +72,7 @@ class _ADHDTestState extends State<ADHDTest> {
                   Container(
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Color.fromARGB(110, 72, 185, 219),
                       borderRadius: BorderRadius.circular(10.0)
                     ),
                     child: Row(
@@ -106,9 +106,25 @@ class _ADHDTestState extends State<ADHDTest> {
                         ans = 0;
                       }, 
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
-                      child: const Text('Not at All',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('Never',style: TextStyle(color: Colors.white,fontSize: 20),),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  SizedBox(
+                    height: 40,
+                    width: 350,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ans = 0;
+                      }, 
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
+                      ),
+                      child: const Text('Rarely',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
@@ -122,9 +138,9 @@ class _ADHDTestState extends State<ADHDTest> {
                         ans = 1;
                       }, 
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
-                      child: const Text('Several Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('Sometimes',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
@@ -135,12 +151,12 @@ class _ADHDTestState extends State<ADHDTest> {
                     width: 350,
                     child: ElevatedButton(
                       onPressed: () {
-                        ans = 2;
+                        ans = 1;
                       }, 
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
-                      child: const Text('More than half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('often',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
@@ -151,21 +167,21 @@ class _ADHDTestState extends State<ADHDTest> {
                     width: 350,
                     child: ElevatedButton(
                       onPressed: () {
-                        ans = 3;
+                        ans = 1;
                       }, 
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
-                      child: const Text('Nearly Half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('Very Often',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 170,left: 200),
+                    padding: EdgeInsets.only(top: 110,left: 200),
                     child: SizedBox(
                       height: 70,
                       width: 100,
                       child: FloatingActionButton(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Color.fromARGB(255, 49, 162, 196),
                         onPressed: () {
                           _movedToNextScreen();
                         },
@@ -197,7 +213,9 @@ class _ADHDTestState extends State<ADHDTest> {
   void _movedToNextScreen() {
     if(index < 17) {
       setState(() {
-        result = result + ans;
+        if(index < 6) {
+          result = result + ans;
+        }
         index = index + 1;
         _questionFuture = _fetchQuestion(); // Re-fetch the next question
       });

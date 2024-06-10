@@ -52,7 +52,7 @@ class _UserInfoState extends State<UserInfo> {
                   child: image == null ?
                   CircleAvatar(
                     radius: 70,
-                    backgroundColor: Colors.blue.shade700,
+                    backgroundColor: Color.fromARGB(255, 49, 162, 197),
                     child: Icon(Icons.account_circle,size: 70, color: Colors.white,),
                   ) :
                   CircleAvatar(
@@ -82,7 +82,7 @@ class _UserInfoState extends State<UserInfo> {
                   child: ElevatedButton(
                     onPressed: () => storeData(context),
                     style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.blue.shade700),
+                      backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 197)),
                     ),
                     child: const Text('Continue',style: TextStyle(color: Colors.white,fontSize: 17),),
                   ),
@@ -140,7 +140,7 @@ class _UserInfoState extends State<UserInfo> {
     return Padding(
       padding: EdgeInsets.all(15),
       child: TextFormField(
-        cursorColor: Colors.blue.shade800,
+        cursorColor: Color.fromARGB(255, 49, 162, 197),
         controller: controller,
         keyboardType: inputType,
         maxLines: maxlines,
@@ -149,7 +149,7 @@ class _UserInfoState extends State<UserInfo> {
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.transparent)
           ),
-          focusColor: Colors.blue.shade800,
+          focusColor: Color.fromARGB(255, 49, 162, 197),
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.transparent),
             
@@ -157,7 +157,7 @@ class _UserInfoState extends State<UserInfo> {
           prefixIcon: Container(
             margin: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: Colors.blue.shade800,
+              color: Color.fromARGB(255, 49, 162, 197),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
@@ -167,7 +167,7 @@ class _UserInfoState extends State<UserInfo> {
             ),
           ),
           alignLabelWithHint: true,
-          fillColor: Colors.blue.shade100,
+          fillColor: Color.fromARGB(255, 174, 226, 241),
           filled: true,
         ),
       )

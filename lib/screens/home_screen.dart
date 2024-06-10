@@ -34,13 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         leading: GestureDetector(
           onTap: (){
             //Navigator.pop(context);
           },
-          child: Icon(Icons.arrow_back,color: Color.fromARGB(255, 15, 75, 165))
+          child: Icon(Icons.arrow_back,color: const Color.fromRGBO(26, 33, 48,0))
         ),
         title: GestureDetector(
           onTap: (){
@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
             'Hello, There!':'Hello, $_nameFuture',
             style: const  TextStyle(color: Colors.white),)
         ),
-        backgroundColor: Color.fromARGB(255, 15, 75, 165),
+        backgroundColor: Color.fromARGB(255, 49, 162, 197),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 200,
                   width: 500,
                   decoration: BoxDecoration(
-                    color: Colors.blue.shade200,
+                    color: Color.fromARGB(255, 134, 215, 240),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(
@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 200,
                   width: 500,
                   decoration: BoxDecoration(
-                    color: Colors.blue.shade200,
+                    color: Color.fromARGB(255, 134, 215, 240),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(
@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 200,
                   width: 500,
                   decoration: BoxDecoration(
-                    color: Colors.blue.shade200,
+                    color: Color.fromARGB(255, 134, 215, 240),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(
@@ -220,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 200,
                   width: 500,
                   decoration: BoxDecoration(
-                    color: Colors.blue.shade200,
+                    color: Color.fromARGB(255, 134, 215, 240),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(
@@ -269,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 200,
                   width: 500,
                   decoration: BoxDecoration(
-                    color: Colors.blue.shade200,
+                    color: Color.fromARGB(255, 134, 215, 240),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(
@@ -314,7 +314,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 200,
                   width: 500,
                   decoration: BoxDecoration(
-                    color: Colors.blue.shade200,
+                    color: Color.fromARGB(255, 134, 215, 240),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(

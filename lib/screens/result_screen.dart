@@ -15,7 +15,7 @@ class _ResultState extends State<Result> {
     return Scaffold(
       backgroundColor: Colors.blue.shade100,
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 15, 75, 165),
+        backgroundColor: Color.fromARGB(255, 49, 162, 197),
         leading: GestureDetector(
           onTap: (){
             Navigator.pop(context);
@@ -31,14 +31,28 @@ class _ResultState extends State<Result> {
         child: Center(
           child: Column(
             children: [
+              const SizedBox(
+                height: 30,
+              ),
               Text(
-                '${widget.keyword} Test Results',
+                '${widget.keyword.toString().toUpperCase()} Test Results',
                 style: const TextStyle(
                   fontSize: 40,
                   color: Colors.white,
                 ),
               ), 
-              Text('Your score : ${widget.result}'),
+              const SizedBox(
+                height: 30,
+              ),
+              Text(
+                'Your score : ${widget.result.toString().toUpperCase()}',
+                style: TextStyle(
+
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
               Text(
                 showResult(widget.result, widget.keyword)
               ),

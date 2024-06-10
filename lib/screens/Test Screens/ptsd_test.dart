@@ -44,7 +44,7 @@ class _PTSDTestState extends State<PTSDTest> {
           },
           child: Icon(Icons.arrow_back,color: Colors.white)
         ),
-        backgroundColor: Color.fromARGB(255, 15, 75, 165),
+        backgroundColor: Color.fromARGB(255, 49, 162, 197),
         title: const  Text('Self Assessment',style: TextStyle(color: Colors.white),),
       ),
       //--------------------------FETCHING QUESTIONS FROM DATABASE-----------------------------------
@@ -106,7 +106,7 @@ class _PTSDTestState extends State<PTSDTest> {
                         ans = 1;
                       }, 
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
                       child: const Text('Yes',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
@@ -122,7 +122,7 @@ class _PTSDTestState extends State<PTSDTest> {
                         ans = 0;
                       }, 
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
                       child: const Text('No',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
@@ -131,12 +131,12 @@ class _PTSDTestState extends State<PTSDTest> {
                     height: 50,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 170,left: 200),
+                    padding: EdgeInsets.only(top: 70,left: 200),
                     child: SizedBox(
                       height: 70,
                       width: 100,
                       child: FloatingActionButton(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Color.fromARGB(255, 49, 162, 196),
                         onPressed: () {
                           _movedToNextScreen();
                         },
@@ -166,7 +166,7 @@ class _PTSDTestState extends State<PTSDTest> {
     );
   }
   void _movedToNextScreen() {
-    if(index < 17) {
+    if(index < 4) {
       setState(() {
         result = result + ans;
         index = index + 1;

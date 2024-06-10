@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:takecare/screens/player_screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -22,7 +23,7 @@ class _SelfHelpScreenState extends State<SelfHelpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: GestureDetector(
           onTap: (){
@@ -31,7 +32,7 @@ class _SelfHelpScreenState extends State<SelfHelpScreen> {
           child: const Icon(Icons.arrow_back,color: Colors.white)
         ),
         title: const Text("If you wouldn't Help Yourself Noone will",style: TextStyle(color: Colors.white,fontSize: 17),),
-        backgroundColor: const Color.fromARGB(255, 1, 47, 114),
+        backgroundColor: const Color.fromARGB(255, 49, 162, 197),
       ),
       body: Padding(
         padding: EdgeInsets.zero,
@@ -50,11 +51,19 @@ class _SelfHelpScreenState extends State<SelfHelpScreen> {
                 );
               },
               child: Padding(
-                padding: EdgeInsets.zero,
+                padding: const EdgeInsets.all(10),
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Image.network(YoutubePlayer.getThumbnail(videoId: videoId!)),
+                    ClipRect(
+                      child: Align(
+                        alignment: Alignment.center,
+                        heightFactor: 0.72, // Adjust this value to crop more or less from top and bottom
+                        child: Image.network(
+                          YoutubePlayer.getThumbnail(videoId: videoId!),
+                        ),
+                      ),
+                    ),
                     const Icon(
                       Icons.play_arrow,
                       color: Colors.white,
