@@ -128,7 +128,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           ),
                         ),
                         label: const Text('Ask Anything'),
-                        floatingLabelStyle: TextStyle(
+                        floatingLabelStyle: const TextStyle(
                             color: Color.fromARGB(255, 49, 162, 197),
                         ),
                       ),

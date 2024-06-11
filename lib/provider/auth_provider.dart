@@ -32,7 +32,7 @@ class AuthProvider extends ChangeNotifier {
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<bool> checkLoggedIn() async {
+  bool checkLoggedIn() {
     final user = _auth.currentUser;
     return user != null;
   }
@@ -110,6 +110,58 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+//   void verifyOtp({
+//   required BuildContext context,
+//   required String verificationId,
+//   required String userOtp,
+//   required Function OnSuccess,
+// }) async {
+//   _isLoading = true;
+//   notifyListeners();
+
+//   print('VERIFY OTP Called - AuthProvider');
+//   try {
+//     PhoneAuthCredential creds = PhoneAuthProvider.credential(
+//       verificationId: verificationId,
+//       smsCode: userOtp,
+//     );
+//     User? user = (await _firebaseAuth.signInWithCredential(creds)).user;
+//     if (user != null) {
+//       _uid = user.uid;
+//       print('OTP Verified Successfully - AuthProvider');
+//       OnSuccess();
+//     }
+//   } on FirebaseAuthException catch (e) {
+//     showSnackbar(context, e.message.toString());
+//   } finally {
+//     _isLoading = false;
+//     notifyListeners();
+//   }
+// }
+// Future<bool> checkExistingUser() async {
+//   print('Check Existing User Called - AuthProvider');
+//   if (_uid == null) {
+//     print('ERROR: UID is null');
+//     return false;
+//   }
+//   try {
+//     DocumentSnapshot snapshot = await _firebaseFirestore.collection("users").doc(_uid).get();
+//     if (snapshot.exists) {
+//       print('USER EXISTS');
+//       return true;
+//     } else {
+//       print('NEW USER');
+//       return false;
+//     }
+//   } catch (e) {
+//     print('Error checking existing user: $e');
+//     return false;
+//   } finally {
+//     notifyListeners();
+//   }
+// }
+
+
   void verifyOtp({
     required BuildContext context,
     required String verificationId,
@@ -143,7 +195,7 @@ class AuthProvider extends ChangeNotifier {
   Future<bool> checkExistingUser() async {
     print('Check Existing User Called - AuthProvider');
     DocumentSnapshot snapshot =
-        await _firebaseFirestore.collection("users").doc(_uid).get();
+        await _firebaseFirestore.collection("users").doc(_auth.currentUser!.phoneNumber).get();
     if (snapshot.exists) {
       print('USER EXISTS');
       notifyListeners();
@@ -155,26 +207,26 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-//   void saveUserDataToFirebase({
-//     required BuildContext context,
-//     required UserModel userModel,
-//     required File profilePic,
-//     required Function OnSuccess,
-//   }) async {
-//     try {
-//       // Save data to Firestore
-//       await _firebaseFirestore
-//           .collection("users")
-//           .doc(userModel.phoneNumber)
-//           .set(userModel.toMap())
-//           .then((value) {
-//         OnSuccess();
-//       });
-//     } catch (e) {
-//       // Handle errors
-//       print('Error saving user data: $e');
-//     }
-//   }
+  // void saveUserDataToFirebase({
+  //   required BuildContext context,
+  //   required UserModel userModel,
+  //   required File profilePic,
+  //   required Function OnSuccess,
+  // }) async {
+  //   try {
+  //     // Save data to Firestore
+  //     await _firebaseFirestore
+  //         .collection("users")
+  //         .doc(userModel.phoneNumber)
+  //         .set(userModel.toMap())
+  //         .then((value) {
+  //       OnSuccess();
+  //     });
+  //   } catch (e) {
+  //     // Handle errors
+  //     print('Error saving user data: $e');
+  //   }
+  // }
 
 //   Future<String> storeFileToStorage(String ref, File file) async {
 //     UploadTask uploadTask = _firebaseStorage.ref().child(ref).putFile(file);
@@ -193,6 +245,7 @@ void saveUserDataToFirebase({
   required BuildContext context,
   required UserModel userModel,
   required File profilePic,
+  // ignore: non_constant_identifier_names
   required Function OnSuccess,
 }) async {
   try {

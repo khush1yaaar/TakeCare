@@ -8,7 +8,7 @@ class ChatScreenProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => ChatMessages(),
-      child: ChatScreen(),
+      child: const ChatScreen(),
     );
   }
 }

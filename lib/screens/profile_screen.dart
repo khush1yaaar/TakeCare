@@ -191,77 +191,116 @@ class _ProfileScreen extends State<ProfileScreen> {
         title: const Text('Profile Screen',style: TextStyle(color: Colors.white),),
         backgroundColor: Color.fromARGB(255, 49, 162, 197),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: _pickImage,
-              child: CircleAvatar(
-                radius: 115,
-                backgroundColor: Color.fromARGB(255, 49, 162, 197),
-                //backgroundImage: AssetImage('lib/images/family.png',),
-                child: _image == null
-                    ? _profilePicUrl == null
-                        ? const Icon(Icons.person, size: 80, color: Colors.white)
-                        : ClipOval(
-                            child: Image.network(
-                              _profilePicUrl!,
-                              width: 200,
-                              height: 200,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                    : ClipOval(
-                        child: Image.memory(
-                          _image!,
-                          width: 200,
-                          height: 200,
-                          fit: BoxFit.cover,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 30,
+              ),
+              GestureDetector(
+                onTap: _pickImage,
+                child: CircleAvatar(
+                  radius: 115,
+                  backgroundColor: Color.fromARGB(255, 49, 162, 197),
+                  //backgroundImage: AssetImage('lib/images/family.png',),
+                  child: _image == null
+                      ? _profilePicUrl == null
+                          ? const Icon(Icons.person, size: 80, color: Colors.white)
+                          : ClipOval(
+                              child: Image.network(
+                                _profilePicUrl!,
+                                width: 200,
+                                height: 200,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                      : ClipOval(
+                          child: Image.memory(
+                            _image!,
+                            width: 200,
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
-                controller: _nameController,
-                decoration: const InputDecoration(
-                  hintText: 'Enter your name',
-                  labelText: 'Name',
-                  border: OutlineInputBorder(),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
-                controller: _bioController,
-                decoration: const InputDecoration(
-                  hintText: 'Enter your bio',
-                  labelText: 'Feeling Awesome',
-                  border: OutlineInputBorder(),
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: _nameController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your name',
+                    label: const Text('Name'),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 49, 162, 197), 
+                            style: BorderStyle.solid,
+                            width: 1.5,
+                          ),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: Colors.black,
+                            style: BorderStyle.solid
+                          ),
+                    ),
+                    floatingLabelStyle: const TextStyle(
+                      color: Color.fromARGB(255, 49, 162, 197),
+                    ),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 50),
-            ElevatedButton(
-              onPressed: () {
-                Provider.of<takecare_auth.AuthProvider>(context, listen: false).signOut(context);
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 197)),
-              ),
-              child: Text(
-                'Sign out',
-                style: TextStyle(
-                  color: Colors.white
+              SizedBox(height: 20),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: _bioController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your bio',
+                    labelText: 'Feeling Awesome',
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 49, 162, 197), 
+                            style: BorderStyle.solid,
+                            width: 1.5,
+                          ),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: Colors.black,
+                            style: BorderStyle.solid
+                          ),
+                    ),
+                    floatingLabelStyle: const TextStyle(
+                            color: Color.fromARGB(255, 49, 162, 197),
+                        ),
+                  ),
                 ),
               ),
-            )
-          ],
+              const SizedBox(height: 50),
+              ElevatedButton(
+                onPressed: () {
+                  Provider.of<takecare_auth.AuthProvider>(context, listen: false).signOut(context);
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 197)),
+                ),
+                child: Text(
+                  'Sign out',
+                  style: TextStyle(
+                    color: Colors.white
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
