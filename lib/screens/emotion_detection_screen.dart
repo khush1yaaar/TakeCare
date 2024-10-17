@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:takecare/main.dart';
 import 'package:tflite/tflite.dart';
 
 class EmotionDetectionScreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class _EmotionDetectionScreenState extends State<EmotionDetectionScreen> {
   }
 
   loadCamera() {
-    cameraController = CameraController(camera[0], ResolutionPreset.medium);
+    cameraController = CameraController(camera![0], ResolutionPreset.medium);
     cameraController!.initialize().then((_) {
       if (!mounted) {
         return;
