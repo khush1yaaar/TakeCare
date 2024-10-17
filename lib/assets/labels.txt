@@ -1,0 +1,3 @@
+0 Happy
+1 Angry
+2 Sad

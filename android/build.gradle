@@ -4,6 +4,12 @@ allprojects {
         mavenCentral()
     }
 }
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.0' // Upgrade to 8.1.0 or higher
+    }
+}
+
 
 rootProject.buildDir = '../build'
 subprojects {

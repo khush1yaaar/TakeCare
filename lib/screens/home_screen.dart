@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:takecare/screens/article_screen.dart';
 import 'package:takecare/screens/assessment_screen.dart';
+import 'package:takecare/screens/emotion_detection_screen.dart';
 import 'package:takecare/screens/selfhelp_screen.dart';
 
 
@@ -148,6 +149,51 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     ],
                   ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EmotionDetectionScreen()),
+                  );
+                },
+                child: Container(
+                  height: 200,
+                  width: 500,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 134, 215, 240),
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(
+                        blurRadius: 15,
+                        blurStyle: BlurStyle.solid,
+                        color: Colors.blueGrey
+                      )
+                    ]
+                  ),
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Image.asset('lib/images/therapy.png',height: 250,)),
+                      const Text(
+                        'Emotion Detection',
+                        style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                  
                 ),
               ),
             ),

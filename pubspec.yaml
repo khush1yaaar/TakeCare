@@ -50,6 +50,8 @@ dependencies:
   youtube_player_flutter: ^9.0.1
   image_picker: ^1.1.1
   get: ^4.6.6
+  camera: ^0.11.0+2
+  tflite: ^1.1.2
   
 
 dev_dependencies:
@@ -77,6 +79,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - lib/images/
+    - lib/assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

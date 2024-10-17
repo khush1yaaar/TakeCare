@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -5,8 +6,12 @@ import 'package:takecare/provider/auth_provider.dart';
 import 'package:takecare/screens/splash_screen.dart';
 import 'firebase_options.dart';
 
+List<CameraDescription>? camera;
+
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); 
+  WidgetsFlutterBinding.ensureInitialized();
+  camera = await availableCameras();
+  
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -18,10 +23,12 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return ChangeNotifierProvider<AuthProvider>(
-      create: (context) => AuthProvider(), // Provide an instance of AuthProvider
-      child: const MaterialApp(
+      create: (context) =>
+          AuthProvider(), // Provide an instance of AuthProvider
+      child: MaterialApp(
+        theme: ThemeData(primaryColor: Colors.blue),
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
       ),
