@@ -23,7 +23,7 @@ class _EmotionDetectionScreenState extends State<EmotionDetectionScreen> {
   }
 
   loadCamera() {
-    cameraController = CameraController(camera![0], ResolutionPreset.medium);
+    cameraController = CameraController(camera![1], ResolutionPreset.medium);
     cameraController!.initialize().then((_) {
       if (!mounted) {
         return;
@@ -55,18 +55,18 @@ class _EmotionDetectionScreenState extends State<EmotionDetectionScreen> {
         asynch: true,
       );
 
-      predictions!.forEach((element) {
+      for (var element in predictions!) {
         setState(() {
           output = element['label'];
         });
-      });
+      }
     }
   }
 
   loadModel() async {
     await Tflite.loadModel(
-      model: "lib/assets/model.tflite",
-      labels: "lib/assets/labels.txt",
+      model: "ml_model/model.tflite", // Ensure the path is correct
+      labels: "ml_model/labels.txt",
     );
   }
 
@@ -80,44 +80,50 @@ class _EmotionDetectionScreenState extends State<EmotionDetectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Emotion Detection"),
-      ),
-      body: Column(
+      body: Stack(
         children: [
-          // Display the camera preview
+          // Make the camera preview cover the full screen
           cameraController != null && cameraController!.value.isInitialized
-              ? AspectRatio(
-                  aspectRatio: cameraController!.value.aspectRatio,
+              ? SizedBox.expand(
                   child: CameraPreview(cameraController!),
                 )
               : const Center(child: CircularProgressIndicator()),
-          
-          const SizedBox(height: 20),
 
-          // Display the output emotion
-          Text(
-            'Detected Emotion: $output',
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+          // Display the output emotion as an overlay
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              color: Colors.black.withOpacity(0.5),
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'Detected Emotion: $output',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
 
-          const SizedBox(height: 20),
-
-          // Button to stop or start the camera
-          ElevatedButton(
-            onPressed: () {
-              if (cameraController != null && cameraController!.value.isStreamingImages) {
-                cameraController!.stopImageStream();
-              } else {
-                loadCamera();
-              }
-            },
-            child: Text(cameraController != null && cameraController!.value.isStreamingImages
-                ? 'Stop Camera'
-                : 'Start Camera'),
+          // Button to start/stop camera stream
+          Positioned(
+            top: 20,
+            left: 20,
+            child: ElevatedButton(
+              onPressed: () {
+                if (cameraController != null &&
+                    cameraController!.value.isStreamingImages) {
+                  cameraController!.stopImageStream();
+                } else {
+                  loadCamera();
+                }
+              },
+              child: Text(cameraController != null &&
+                      cameraController!.value.isStreamingImages
+                  ? 'Stop Camera'
+                  : 'Start Camera'),
+            ),
           ),
         ],
       ),
