@@ -1,20 +1,26 @@
+buildscript {
+    repositories {
+        google()            // Google's Maven repository
+        mavenCentral()      // Central repository for resolving dependencies
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.0' // Ensure this is the correct version
+    }
+}
+
 allprojects {
     repositories {
-        google()
-        mavenCentral()
+        google()            // Google's Maven repository for all projects
+        mavenCentral()      // Central repository
     }
 }
-buildscript {
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.0' // Upgrade to 8.1.0 or higher
-    }
-}
-
 
 rootProject.buildDir = '../build'
+
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+
 subprojects {
     project.evaluationDependsOn(':app')
 }
