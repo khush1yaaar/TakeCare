@@ -35,7 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      // ignore: deprecated_member_use
+      backgroundColor: Colors.blue.shade50,
       appBar: AppBar(
         leading: GestureDetector(
           onTap: (){

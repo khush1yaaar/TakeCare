@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:takecare/screens/player_screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-final videoUrls = [
-  'https://youtu.be/1W7oUZ8EVbI?si=oBN35rANx6q4vx4y',
-  'https://youtu.be/86sYinrLuPA?si=VW9igD4YfsBanmER',
-  'https://youtu.be/-lOTZRpOvxY?si=vntC-CD_N8IKOzn3',
-  'https://youtu.be/j5qgaKHMw1I?si=eF41WuIv9FBjSe-h',
-  'https://youtu.be/b2RhXCugEW4?si=IzR9c4cZEsUHNGWf',
-  'https://youtu.be/qX5_JLl3wYg?si=zFpEDI7HRQ3orEiO',
-  'https://youtu.be/XOoFuiLeaPg?si=TJf_5JS-FVL-sekJ',
-];
 class SelfHelpScreen extends StatefulWidget {
   const SelfHelpScreen({super.key});
 
@@ -20,61 +13,142 @@ class SelfHelpScreen extends StatefulWidget {
 }
 
 class _SelfHelpScreenState extends State<SelfHelpScreen> {
+  final CollectionReference selfHelpCollection =
+      FirebaseFirestore.instance.collection('selfhelp');
+
+  Future<String?> fetchVideoTitle(String videoId) async {
+    const apiKey = 'AIzaSyDbEkG0tCR_vJ89kDlF-nh4-HSgXkQSMaQ'; // Replace with your API key
+    final url =
+        'https://www.googleapis.com/youtube/v3/videos?part=snippet&id=$videoId&key=$apiKey';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return data['items'][0]['snippet']['title'];
+      }
+    } catch (error) {
+      print("Error fetching video title: $error");
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: GestureDetector(
-          onTap: (){
+          onTap: () {
             Navigator.pop(context);
           },
-          child: const Icon(Icons.arrow_back,color: Colors.white)
+          child: const Icon(Icons.arrow_back, color: Colors.white),
         ),
-        title: const Text("If you wouldn't Help Yourself Noone will",style: TextStyle(color: Colors.white,fontSize: 17),),
+        title: const Text(
+          "If you wouldn't Help Yourself Noone will",
+          style: TextStyle(color: Colors.white, fontSize: 17),
+        ),
         backgroundColor: const Color.fromARGB(255, 49, 162, 197),
       ),
-      body: Padding(
-        padding: EdgeInsets.zero,
-        child: ListView.builder(
-          itemCount: videoUrls.length,
-          itemBuilder: (context, index) {
-            final videoId = YoutubePlayer.convertUrlToId(videoUrls[index]);
-        
-            return InkWell(
-              onTap: (){
-                Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context)=> 
-                    PlayerScreen(videoId: videoId)
-                  )
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    ClipRect(
-                      child: Align(
-                        alignment: Alignment.center,
-                        heightFactor: 0.72, // Adjust this value to crop more or less from top and bottom
-                        child: Image.network(
-                          YoutubePlayer.getThumbnail(videoId: videoId!),
+      body: StreamBuilder(
+        stream: selfHelpCollection.snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return const Center(child: Text('Error fetching videos'));
+          }
+
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return const Center(child: Text('No videos found'));
+          }
+
+          final videoDocs = snapshot.data!.docs;
+
+          return ListView.builder(
+            padding: const EdgeInsets.all(10),
+            itemCount: videoDocs.length,
+            itemBuilder: (context, index) {
+              final videoData = videoDocs[index].data() as Map<String, dynamic>;
+              final videoUrl = videoData.values.first;
+              final videoId = YoutubePlayer.convertUrlToId(videoUrl);
+
+              if (videoId == null) {
+                print("Invalid video URL: $videoUrl");
+                return const SizedBox.shrink(); // Skip invalid URLs
+              }
+
+              return FutureBuilder<String?>(
+                future: fetchVideoTitle(videoId),
+                builder: (context, titleSnapshot) {
+                  final videoTitle = titleSnapshot.data ?? "Loading...";
+
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PlayerScreen(videoId: videoId),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      margin: const EdgeInsets.symmetric(vertical: 8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      elevation: 5,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                YoutubePlayer.getThumbnail(videoId: videoId),
+                                fit: BoxFit.cover,
+                                height: 90,
+                                width: 120,
+                              ),
+                            ),
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    videoTitle,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  const Text(
+                                    "Tap to watch video",
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    const Icon(
-                      Icons.play_arrow,
-                      color: Colors.white,
-                      size: 50,
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
+                  );
+                },
+              );
+            },
+          );
+        },
       ),
     );
   }
