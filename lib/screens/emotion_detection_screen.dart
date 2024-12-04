@@ -1,7 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:takecare/main.dart';
-import 'package:tflite/tflite.dart';
 
 class EmotionDetectionScreen extends StatefulWidget {
   const EmotionDetectionScreen({super.key});
@@ -19,7 +18,7 @@ class _EmotionDetectionScreenState extends State<EmotionDetectionScreen> {
   void initState() {
     super.initState();
     loadCamera();
-    loadModel();
+    //loadModel();
   }
 
   loadCamera() {
@@ -31,7 +30,7 @@ class _EmotionDetectionScreenState extends State<EmotionDetectionScreen> {
       setState(() {
         cameraController!.startImageStream((image) {
           cameraImage = image;
-          runModel();
+          //runModel();
         });
       });
     }).catchError((e) {
@@ -39,41 +38,41 @@ class _EmotionDetectionScreenState extends State<EmotionDetectionScreen> {
     });
   }
 
-  runModel() async {
-    if (cameraImage != null) {
-      var predictions = await Tflite.runModelOnFrame(
-        bytesList: cameraImage!.planes.map((planes) {
-          return planes.bytes;
-        }).toList(),
-        imageHeight: cameraImage!.height,
-        imageWidth: cameraImage!.width,
-        imageMean: 127.5,
-        imageStd: 127.5,
-        rotation: 90,
-        numResults: 2,
-        threshold: 0.1,
-        asynch: true,
-      );
+  // runModel() async {
+  //   if (cameraImage != null) {
+  //     var predictions = await Tflite.runModelOnFrame(
+  //       bytesList: cameraImage!.planes.map((planes) {
+  //         return planes.bytes;
+  //       }).toList(),
+  //       imageHeight: cameraImage!.height,
+  //       imageWidth: cameraImage!.width,
+  //       imageMean: 127.5,
+  //       imageStd: 127.5,
+  //       rotation: 90,
+  //       numResults: 2,
+  //       threshold: 0.1,
+  //       asynch: true,
+  //     );
 
-      for (var element in predictions!) {
-        setState(() {
-          output = element['label'];
-        });
-      }
-    }
-  }
+  //     for (var element in predictions!) {
+  //       setState(() {
+  //         output = element['label'];
+  //       });
+  //     }
+  //   }
+  // }
 
-  loadModel() async {
-    await Tflite.loadModel(
-      model: "ml_model/model.tflite", // Ensure the path is correct
-      labels: "ml_model/labels.txt",
-    );
-  }
+  // loadModel() async {
+  //   await Tflite.loadModel(
+  //     model: "ml_model/model.tflite", // Ensure the path is correct
+  //     labels: "ml_model/labels.txt",
+  //   );
+  // }
 
   @override
   void dispose() {
     cameraController?.dispose();
-    Tflite.close();
+    //Tflite.close();
     super.dispose();
   }
 
@@ -111,6 +110,9 @@ class _EmotionDetectionScreenState extends State<EmotionDetectionScreen> {
             top: 20,
             left: 20,
             child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(Theme.of(context).scaffoldBackgroundColor),
+              ),
               onPressed: () {
                 if (cameraController != null &&
                     cameraController!.value.isStreamingImages) {
@@ -122,7 +124,9 @@ class _EmotionDetectionScreenState extends State<EmotionDetectionScreen> {
               child: Text(cameraController != null &&
                       cameraController!.value.isStreamingImages
                   ? 'Stop Camera'
-                  : 'Start Camera'),
+                  : 'Start Camera',
+                  style: TextStyle(color: Theme.of(context).textTheme.bodyLarge!.color),
+                ),
             ),
           ),
         ],

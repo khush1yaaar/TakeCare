@@ -1,12 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:takecare/screens/article_screen.dart';
 import 'package:takecare/screens/assessment_screen.dart';
 import 'package:takecare/screens/emotion_detection_screen.dart';
 import 'package:takecare/screens/selfhelp_screen.dart';
-
+import 'package:takecare/theme/themes.dart';
 
 class HomeScreen extends StatefulWidget {
   static String id = 'home-screen';
@@ -17,388 +14,170 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<DocumentSnapshot<Map<String, dynamic>>> _nameFuture;
+  //late Future<DocumentSnapshot<Map<String, dynamic>>> _nameFuture;
+
   @override
   void initState() {
-    // TODO: implement initState
-    _nameFuture = _fetchName();
     super.initState();
+    //_nameFuture = _fetchName();
   }
-  Future<DocumentSnapshot<Map<String, dynamic>>> _fetchName() async {
-    // Replace 'procrastination' with the document ID you want to fetch
-    return FirebaseFirestore.instance
-        .collection('users')
-        .doc('name')
-        .get();
-  }
+
+  // Future<DocumentSnapshot<Map<String, dynamic>>> _fetchName() async {
+  //   return FirebaseFirestore.instance.collection('users').doc('name').get();
+  // }
+
   @override
   Widget build(BuildContext context) {
-    
+
+    final theme = Theme.of(context);
+
     return Scaffold(
-      // ignore: deprecated_member_use
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        leading: GestureDetector(
-          onTap: (){
-            //Navigator.pop(context);
-          },
-          child: Icon(Icons.arrow_back,color: const Color.fromRGBO(26, 33, 48,0))
-        ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              CustomTheme.isDarkTheme ? Icons.light_mode : Icons.dark_mode,
+              color: Theme.of(context).iconTheme.color,
+            ),
+            onPressed: () {
+              setState(() {
+                currentTheme.toggleTheme(); 
+              });
+            },
+          ),
+        ],
         title: GestureDetector(
-          onTap: (){
-           //_nameInputPopUp(context);
-          },
-          // ignore: unnecessary_null_comparison
-          child: Text(_nameFuture != null?
-            'Hello, There!':'Hello, $_nameFuture',
-            style: const  TextStyle(color: Colors.white),)
-        ),
-        backgroundColor: Color.fromARGB(255, 49, 162, 197),
+          onTap: () {},
+          child: Text(
+            ' Hello, There!',
+            style: TextStyle(
+              color: theme.appBarTheme.backgroundColor,
+              fontSize: 25,
+              fontWeight: FontWeight.bold
+            ),
+          ),
+        ), 
+        backgroundColor: theme.scaffoldBackgroundColor,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: GestureDetector(
-                onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AssessmentScreen()),
-                  );
-                },
-                child: Container(
-                  height: 200,
-                  width: 500,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 134, 215, 240),
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 15,
-                        blurStyle: BlurStyle.solid,
-                        color: Colors.blueGrey
-                      )
-                    ]
-                  ),
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: Image.asset('lib/images/therapy.png',height: 250,)),
-                      const Text(
-                        'Self Assessment',
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white70,
-                        ),
-                      )
-                    ],
-                  ),
-                  
-                ),
+            _buildSection(
+              context,
+              title: 'Self Assessment',
+              image: 'lib/images/therapy.png',
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AssessmentScreen()),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: GestureDetector(
-                onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context)=> const SelfHelpScreen()
-                    )
-                  );
-                },
-                child: Container(
-                  height: 200,
-                  width: 500,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 134, 215, 240),
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 15,
-                        blurStyle: BlurStyle.solid,
-                        color: Colors.blueGrey
-                      )
-                    ]
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        left: 0,
-                        child: Image.asset('lib/images/puzzle.png',height: 150,)),
-                      const Positioned(
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        child: Text(
-                          '   Self Help Tools',
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white70,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+            _buildSection(
+              context,
+              title: 'Self Help Tools',
+              image: 'lib/images/puzzle.png',
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SelfHelpScreen()),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: GestureDetector(
-                onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => EmotionDetectionScreen()),
-                  );
-                },
-                child: Container(
-                  height: 200,
-                  width: 500,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 134, 215, 240),
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 15,
-                        blurStyle: BlurStyle.solid,
-                        color: Colors.blueGrey
-                      )
-                    ]
-                  ),
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: Image.asset('lib/images/therapy.png',height: 250,)),
-                      const Text(
-                        'Emotion Detection',
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white70,
-                        ),
-                      )
-                    ],
-                  ),
-                  
-                ),
+            _buildSection(
+              context,
+              title: 'Emotion Detection',
+              image: 'lib/images/therapy.png',
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EmotionDetectionScreen()),
               ),
             ),
-            Container(
-              height: 1,
-              width: 350,
-              color: Colors.grey,
-            ),
-
-            //------------------ ARTICLE - 1 --------------
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: GestureDetector(
-                onTap: (){
-                  Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (context)=> ArticleScreen(article:'procrastination',audio: ''))
-                  );
-                },
-                child: Container(
-                  height: 200,
-                  width: 500,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 134, 215, 240),
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 15,
-                        blurStyle: BlurStyle.solid,
-                        color: Colors.blueGrey
-                      )
-                    ]
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        left: 0,
-                        child: Image.asset('lib/images/stress.png',height: 150,)),
-                      const Positioned(
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        child: Text(
-                          '   Procrastination',
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white70,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+            _buildArticleSection(
+              context,
+              title: 'Procrastination',
+              image: 'lib/images/stress.png',
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ArticleScreen(article: 'procrastination', audio: '')),
               ),
             ),
-            //-------------- ARTICLE - 2 -----------------
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: GestureDetector(
-                onTap: (){
-                  Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (context)=> ArticleScreen(article: 'self-esteem', audio: ''))
-                  );
-                },
-                child: Container(
-                  height: 200,
-                  width: 500,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 134, 215, 240),
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 15,
-                        blurStyle: BlurStyle.solid,
-                        color: Colors.blueGrey
-                      )
-                    ]
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        left: 0,
-                        child: Image.asset('lib/images/selfimage.png',height: 150,)),
-                      const Positioned(
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        child: Text(
-                          '      Self Esteem',
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white70,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+            _buildArticleSection(
+              context,
+              title: 'Self Esteem',
+              image: 'lib/images/selfimage.png',
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ArticleScreen(article: 'self-esteem', audio: '')),
               ),
             ),
-            //------------------ ARTICLE - 3 --------------
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: GestureDetector(
-                onTap: (){
-                  Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (context)=> ArticleScreen(article:'self-acceptance',audio: ''))
-                  );
-                },
-                child: Container(
-                  height: 200,
-                  width: 500,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 134, 215, 240),
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 15,
-                        blurStyle: BlurStyle.solid,
-                        color: Colors.blueGrey
-                      )
-                    ]
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        left: 0,
-                        child: Image.asset('lib/images/burnout.png',height: 150,)),
-                      const Positioned(
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        child: Text(
-                          '  Self Acceptance',
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white70,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: GestureDetector(
-                onTap: (){
-                  
-                },
-                child: Container(
-                  height: 200,
-                  width: 500,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 134, 215, 240),
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 15,
-                        blurStyle: BlurStyle.solid,
-                        color: Colors.blueGrey
-                      )
-                    ]
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        left: 0,
-                        child: Image.asset('lib/images/stress.png',height: 150,)),
-                      const Positioned(
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        child: Text(
-                          '   Procrastination',
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white70,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+            _buildArticleSection(
+              context,
+              title: 'Self Acceptance',
+              image: 'lib/images/burnout.png',
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ArticleScreen(article: 'self-acceptance', audio: '')),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildSection(BuildContext context,
+      {required String title,
+      required String image,
+      required VoidCallback onTap}) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          height: 200,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: const Color(0xFF424242), // Medium grey container
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 15,
+                color: Theme.of(context).appBarTheme.backgroundColor ?? Colors.black, // Slightly darker grey shadow
+              )
+            ],
+          ),
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: Image.asset(image, height: 150),
+              ),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).textTheme.bodyLarge!.color ?? Colors.white, // Light grey text
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildArticleSection(BuildContext context,
+      {required String title,
+      required String image,
+      required VoidCallback onTap}) {
+    return _buildSection(context, title: title, image: image, onTap: onTap);
   }
 }

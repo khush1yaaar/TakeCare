@@ -6,7 +6,7 @@ class Constants{
   fontWeight: FontWeight.w700,
 );
   // ignore: constant_identifier_names
-  static const APIkey = 'AIzaSyCrto_gzRkC9hhywRqcu0sDNCjWsKsGnxk';
+  static const APIkey = "AIzaSyAB12w1xR0bi7RLCZZrZMGkuR2AGugrtSE";
 }
 
 //SHA VALUES

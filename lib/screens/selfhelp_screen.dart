@@ -35,20 +35,21 @@ class _SelfHelpScreenState extends State<SelfHelpScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: const Icon(Icons.arrow_back, color: Colors.white),
+        title: Text(
+          "One Step at a time",
+          style: TextStyle(
+              color: theme.appBarTheme.backgroundColor,
+              fontSize: 25,
+              fontWeight: FontWeight.bold
+            ),
         ),
-        title: const Text(
-          "If you wouldn't Help Yourself Noone will",
-          style: TextStyle(color: Colors.white, fontSize: 17),
-        ),
-        backgroundColor: const Color.fromARGB(255, 49, 162, 197),
+        backgroundColor: theme.scaffoldBackgroundColor,
       ),
       body: StreamBuilder(
         stream: selfHelpCollection.snapshots(),
@@ -95,6 +96,7 @@ class _SelfHelpScreenState extends State<SelfHelpScreen> {
                       );
                     },
                     child: Card(
+                      color: theme.appBarTheme.backgroundColor,
                       margin: const EdgeInsets.symmetric(vertical: 8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -120,8 +122,8 @@ class _SelfHelpScreenState extends State<SelfHelpScreen> {
                                 children: [
                                   Text(
                                     videoTitle,
-                                    style: const TextStyle(
-                                      color: Colors.black,
+                                    style: TextStyle(
+                                      color: theme.textTheme.bodyLarge!.color,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
@@ -129,10 +131,10 @@ class _SelfHelpScreenState extends State<SelfHelpScreen> {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   const SizedBox(height: 8),
-                                  const Text(
+                                  Text(
                                     "Tap to watch video",
                                     style: TextStyle(
-                                      color: Colors.grey,
+                                      color: theme.textTheme.bodySmall!.color,
                                       fontSize: 14,
                                     ),
                                   ),

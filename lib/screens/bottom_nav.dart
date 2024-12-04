@@ -32,11 +32,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+
+    final theme = Theme.of(context); 
+
     return Scaffold(
+      extendBody: true,
+      backgroundColor: Colors.transparent,
       bottomNavigationBar: CurvedNavigationBar(
         height: 65,
-        backgroundColor: Colors.blue.shade50,
-        color: Color.fromARGB(255, 49, 162, 197),
+        backgroundColor: Colors.transparent,
+        color: theme.appBarTheme.backgroundColor ?? Colors.black,
         animationDuration: Durations.medium2,
         onTap: (index){
           setState(() {
