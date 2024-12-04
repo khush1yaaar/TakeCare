@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:takecare/screens/result_screen.dart';
+import 'package:takecare/screens/result_screens/result_screen.dart';
 
 // ignore: must_be_immutable
 class AnxietyTest extends StatefulWidget {
@@ -36,7 +36,7 @@ class _AnxietyTestState extends State<AnxietyTest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.blue.shade100,
       appBar: AppBar(
         leading: GestureDetector(
           onTap: (){
@@ -72,7 +72,7 @@ class _AnxietyTestState extends State<AnxietyTest> {
                   Container(
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(110, 72, 185, 219),
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(10.0)
                     ),
                     child: Row(
@@ -108,7 +108,7 @@ class _AnxietyTestState extends State<AnxietyTest> {
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
-                      child: const Text('Not at All',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('Never',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
@@ -124,7 +124,7 @@ class _AnxietyTestState extends State<AnxietyTest> {
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
-                      child: const Text('Several Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('Some Times',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
@@ -140,24 +140,11 @@ class _AnxietyTestState extends State<AnxietyTest> {
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
-                      child: const Text('More than half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('Often',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
                     height: 50,
-                  ),
-                  SizedBox(
-                    height: 40,
-                    width: 350,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        ans = 3;
-                      }, 
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
-                      ),
-                      child: const Text('Nearly Half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
-                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 170,left: 200),

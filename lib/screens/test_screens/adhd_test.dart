@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:takecare/screens/result_screen.dart';
+import 'package:takecare/screens/result_screens/result_screen.dart';
 
 // ignore: must_be_immutable
 class ADHDTest extends StatefulWidget {

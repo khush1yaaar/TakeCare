@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:takecare/screens/Test%20Screens/adhd_test.dart';
-import 'package:takecare/screens/Test%20Screens/anxiety_test.dart';
-import 'package:takecare/screens/Test%20Screens/bipolar_test.dart';
-import 'package:takecare/screens/Test%20Screens/depression_test.dart';
-import 'package:takecare/screens/Test%20Screens/ptsd_test.dart';
+import 'package:takecare/screens/test_screens/adhd_test.dart';
+import 'package:takecare/screens/test_screens/anxiety_test.dart';
+import 'package:takecare/screens/test_screens/bipolar_test.dart';
+import 'package:takecare/screens/test_screens/depression_test.dart';
+import 'package:takecare/screens/test_screens/ptsd_test.dart';
 
 // ignore: must_be_immutable
 class AssessmentScreen extends StatefulWidget {

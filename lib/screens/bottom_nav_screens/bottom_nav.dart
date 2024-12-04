@@ -1,8 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:takecare/screens/chat_screen.dart';
-import 'package:takecare/screens/home_screen.dart';
-import 'package:takecare/screens/profile_screen.dart';
+import 'package:takecare/screens/bottom_nav_screens/chat_screen.dart';
+import 'package:takecare/screens/bottom_nav_screens/home_screen.dart';
+import 'package:takecare/screens/bottom_nav_screens/profile_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});

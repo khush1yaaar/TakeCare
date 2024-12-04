@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:takecare/provider/auth_provider.dart';
-import 'package:takecare/screens/bottom_nav.dart';
+import 'package:takecare/screens/bottom_nav_screens/bottom_nav.dart';
 import 'package:takecare/screens/user_info.dart';
 import 'package:takecare/widgets/utils.dart';
 

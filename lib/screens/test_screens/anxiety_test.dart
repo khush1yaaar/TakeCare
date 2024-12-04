@@ -2,19 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:takecare/screens/result_screen.dart';
+import 'package:takecare/screens/result_screens/result_screen.dart';
 
 // ignore: must_be_immutable
-class BiPolarTest extends StatefulWidget {
+class AnxietyTest extends StatefulWidget {
   String keyword;
 
-  BiPolarTest({super.key, required this.keyword});
+  AnxietyTest({super.key, required this.keyword});
 
   @override
-  State<BiPolarTest> createState() => _BiPolarTestState();
+  State<AnxietyTest> createState() => _AnxietyTestState();
 }
 
-class _BiPolarTestState extends State<BiPolarTest> {
+class _AnxietyTestState extends State<AnxietyTest> {
   late Future<DocumentSnapshot<Map<String, dynamic>>> _questionFuture;
   int ans = 0;
   int index = 0;
@@ -36,7 +36,7 @@ class _BiPolarTestState extends State<BiPolarTest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade100,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: GestureDetector(
           onTap: (){
@@ -72,7 +72,7 @@ class _BiPolarTestState extends State<BiPolarTest> {
                   Container(
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Color.fromARGB(110, 72, 185, 219),
                       borderRadius: BorderRadius.circular(10.0)
                     ),
                     child: Row(
@@ -103,12 +103,12 @@ class _BiPolarTestState extends State<BiPolarTest> {
                     width: 350,
                     child: ElevatedButton(
                       onPressed: () {
-                        ans = 1;
+                        ans = 0;
                       }, 
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
-                      child: const Text('Yes',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('Not at All',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
@@ -119,16 +119,45 @@ class _BiPolarTestState extends State<BiPolarTest> {
                     width: 350,
                     child: ElevatedButton(
                       onPressed: () {
-                        ans = 0;
+                        ans = 1;
                       }, 
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
-                      child: const Text('No',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('Several Days',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
                     height: 50,
+                  ),
+                  SizedBox(
+                    height: 40,
+                    width: 350,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ans = 2;
+                      }, 
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
+                      ),
+                      child: const Text('More than half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  SizedBox(
+                    height: 40,
+                    width: 350,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ans = 3;
+                      }, 
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
+                      ),
+                      child: const Text('Nearly Half the Days',style: TextStyle(color: Colors.white,fontSize: 20),),
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 170,left: 200),
@@ -166,7 +195,7 @@ class _BiPolarTestState extends State<BiPolarTest> {
     );
   }
   void _movedToNextScreen() {
-    if(index < 12) {
+    if(index < 6) {
       setState(() {
         result = result + ans;
         index = index + 1;

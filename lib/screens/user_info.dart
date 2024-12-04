@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:takecare/models/user_model.dart';
 import 'package:takecare/provider/auth_provider.dart';
-import 'package:takecare/screens/bottom_nav.dart';
+import 'package:takecare/screens/bottom_nav_screens/bottom_nav.dart';
 import 'package:takecare/widgets/utils.dart';
 
 class UserInfo extends StatefulWidget {

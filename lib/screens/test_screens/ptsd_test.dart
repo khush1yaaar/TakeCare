@@ -2,19 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:takecare/screens/result_screen.dart';
+import 'package:takecare/screens/result_screens/result_screen.dart';
 
 // ignore: must_be_immutable
-class AnxietyTest extends StatefulWidget {
+class PTSDTest extends StatefulWidget {
   String keyword;
 
-  AnxietyTest({super.key, required this.keyword});
+  PTSDTest({super.key, required this.keyword});
 
   @override
-  State<AnxietyTest> createState() => _AnxietyTestState();
+  State<PTSDTest> createState() => _PTSDTestState();
 }
 
-class _AnxietyTestState extends State<AnxietyTest> {
+class _PTSDTestState extends State<PTSDTest> {
   late Future<DocumentSnapshot<Map<String, dynamic>>> _questionFuture;
   int ans = 0;
   int index = 0;
@@ -103,28 +103,12 @@ class _AnxietyTestState extends State<AnxietyTest> {
                     width: 350,
                     child: ElevatedButton(
                       onPressed: () {
-                        ans = 0;
-                      }, 
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
-                      ),
-                      child: const Text('Never',style: TextStyle(color: Colors.white,fontSize: 20),),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  SizedBox(
-                    height: 40,
-                    width: 350,
-                    child: ElevatedButton(
-                      onPressed: () {
                         ans = 1;
                       }, 
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
-                      child: const Text('Some Times',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('Yes',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
@@ -135,19 +119,19 @@ class _AnxietyTestState extends State<AnxietyTest> {
                     width: 350,
                     child: ElevatedButton(
                       onPressed: () {
-                        ans = 2;
+                        ans = 0;
                       }, 
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 196)),
                       ),
-                      child: const Text('Often',style: TextStyle(color: Colors.white,fontSize: 20),),
+                      child: const Text('No',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                   ),
                   const SizedBox(
                     height: 50,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 170,left: 200),
+                    padding: EdgeInsets.only(top: 70,left: 200),
                     child: SizedBox(
                       height: 70,
                       width: 100,
@@ -182,7 +166,7 @@ class _AnxietyTestState extends State<AnxietyTest> {
     );
   }
   void _movedToNextScreen() {
-    if(index < 6) {
+    if(index < 4) {
       setState(() {
         result = result + ans;
         index = index + 1;

@@ -2,8 +2,8 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:takecare/provider/auth_provider.dart';
-import 'package:takecare/screens/home_screen.dart';
-import 'package:takecare/screens/login_screen.dart';
+import 'package:takecare/screens/bottom_nav_screens/home_screen.dart';
+import 'package:takecare/screens/auth_screens/login_screen.dart';
 
 
 class GetStartedScreen extends StatefulWidget {

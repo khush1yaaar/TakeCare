@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:takecare/models/user_model.dart';
 import 'package:takecare/screens/get_started.dart';
-import 'package:takecare/screens/otp_screen.dart';
+import 'package:takecare/screens/auth_screens/otp_screen.dart';
 import 'package:takecare/widgets/utils.dart';
 
 class AuthProvider extends ChangeNotifier {
