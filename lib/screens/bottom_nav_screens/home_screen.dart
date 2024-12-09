@@ -124,6 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ArticleScreen(article: 'self-acceptance', audio: '')),
               ),
             ),
+            const SizedBox(height: 80,)
           ],
         ),
       ),

@@ -8,8 +8,9 @@ class ArticleScreen extends StatefulWidget {
   String article;
   String audio;
 
-  ArticleScreen({key, required this.article, required this.audio});
-  
+  ArticleScreen({Key? key, required this.article, required this.audio})
+      : super(key: key);
+
   @override
   State<ArticleScreen> createState() => _ArticleScreenState();
 }
@@ -17,6 +18,7 @@ class ArticleScreen extends StatefulWidget {
 class _ArticleScreenState extends State<ArticleScreen> {
   late Future<DocumentSnapshot<Map<String, dynamic>>> _articleFuture;
   late Future<DocumentSnapshot<Map<String, dynamic>>> _videoFuture;
+
   @override
   void initState() {
     super.initState();
@@ -25,7 +27,6 @@ class _ArticleScreenState extends State<ArticleScreen> {
   }
 
   Future<DocumentSnapshot<Map<String, dynamic>>> _fetchArticle() async {
-    // Replace 'procrastination' with the document ID you want to fetch
     return FirebaseFirestore.instance
         .collection('articles')
         .doc(widget.article)
@@ -33,25 +34,42 @@ class _ArticleScreenState extends State<ArticleScreen> {
   }
 
   Future<DocumentSnapshot<Map<String, dynamic>>> _fetchVideo() async {
-    // Replace 'procrastination' with the document ID you want to fetch
     return FirebaseFirestore.instance
         .collection('videos')
         .doc(widget.article)
         .get();
   }
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    
+
+
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 200, 236, 247),
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: Text(widget.article),
-        backgroundColor: Color.fromARGB(255, 49, 162, 197),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: theme.appBarTheme.backgroundColor,
+            )),
+        title: Text(
+          widget.article,
+          style: TextStyle(
+            color: theme.appBarTheme.backgroundColor,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: theme.scaffoldBackgroundColor,
       ),
       body: FutureBuilder(
         future: Future.wait([_articleFuture, _videoFuture]),
         builder: (context, snapshot) {
-          
-          //------------ YouTube Video data ------------------
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -62,102 +80,107 @@ class _ArticleScreenState extends State<ArticleScreen> {
             return const Center(child: Text('No data found'));
           }
 
-          // Access the article data from snapshot.data
-          final videoData = snapshot.data![1].data();
-          if (videoData == null || videoData.isEmpty) {
-            return const Center(child: Text('Article data is empty'));
-          }
-
-          // Access individual fields from articleData
-          final videoContent = videoData[widget.article];
-          //final String? videoId = YoutubePlayer.convertUrlToId(widget.video);
-          
-          print('Video content: $videoContent');
-
-
-          //-------------- Article Data -----------------
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          }
-          if (!snapshot.hasData || snapshot.data == null) {
-            return const Center(child: Text('No data found'));
-          }
-
-          // Access the article data from snapshot.data
           final articleData = snapshot.data![0].data();
-          if (articleData == null || articleData.isEmpty) {
-            return const Center(child: Text('Article data is empty'));
-          }
+          final videoData = snapshot.data![1].data();
 
-          // Access individual fields from articleData
-          // final articleContent = articleData[widget.article];
-          // print('Article content: $articleContent');
-
-
-          // Return your UI widgets with fetched data
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-                //------------Youtube Video-------------
-                
-                if (videoData.containsKey(widget.article) && videoData[widget.article] is String)
-                  
+                if (videoData != null && videoData.containsKey(widget.article))
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       Navigator.push(
-                        context, 
-                        MaterialPageRoute(builder: (context)=> 
-                          PlayerScreen(videoId: YoutubePlayer.convertUrlToId(videoData[widget.article])!)
-                        )
-                      );
-                    },
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Container(
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: Colors.black),
-                              top: BorderSide(color: Colors.black),
-                              left: BorderSide(color: Colors.black),
-                              right: BorderSide(color: Colors.black),
-                            )
-                          ),
-                          child: Image.network(
-                            YoutubePlayer
-                            .getThumbnail(
-                              videoId: YoutubePlayer.convertUrlToId(videoData[widget.article])!,
-                            ),
-                            height: 200,
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PlayerScreen(
+                            videoId: YoutubePlayer.convertUrlToId(
+                                videoData[widget.article])!,
                           ),
                         ),
-                        const Icon(
-                          Icons.play_arrow_rounded,
-                          color: Colors.white,
-                          size: 40,
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      decoration: BoxDecoration(
+                        color: theme.cardColor,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: theme.appBarTheme.backgroundColor ??
+                                Colors.black,
+                            blurRadius: 6,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.network(
+                              YoutubePlayer.getThumbnail(
+                                videoId: YoutubePlayer.convertUrlToId(
+                                    videoData[widget.article])!,
+                              ),
+                              height: 200,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          const Icon(
+                            Icons.play_arrow_rounded,
+                            color: Colors.white,
+                            size: 40,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                if (articleData != null &&
+                    articleData.containsKey(widget.article))
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: theme.cardColor,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color:
+                              theme.appBarTheme.backgroundColor ?? Colors.black,
+                          blurRadius: 6,
+                          spreadRadius: 2,
                         ),
                       ],
                     ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: articleData[widget.article].toString().split('\n').map((paragraph) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 12), // Add spacing between paragraphs
+                          child: Text(
+                            paragraph
+                                .trim(), // Trim unnecessary spaces or newlines
+                            style: TextStyle(
+                              color: theme.appBarTheme.backgroundColor,
+                              fontSize: 16,
+                              height: 1.5, // Line height for better readability
+                            ),
+                            textAlign: TextAlign.justify,
+                          ),
+                        );
+                      }).toList(),
+                    ),
                   ),
-
-                //----------- Article--------------
-                if (articleData.containsKey(widget.article) && articleData[widget.article] is String)
-                  Text(
-                    articleData[widget.article] as String,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                if (articleData.containsKey(widget.article) && articleData[widget.article] is! String)
+                if (articleData == null ||
+                    !articleData.containsKey(widget.article))
                   const Text(
-                    'Invalid article content format',
+                    'No article content available',
                     style: TextStyle(fontSize: 16),
                   ),
-
               ],
             ),
           );

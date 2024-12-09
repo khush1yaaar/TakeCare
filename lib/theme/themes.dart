@@ -25,7 +25,7 @@ class CustomTheme with ChangeNotifier {
 
       // AppBar theme settings for the light theme.
       appBarTheme: AppBarTheme(
-        backgroundColor: Colors.teal.shade400, // Dominant color: Slightly dark blue.
+        backgroundColor: Colors.teal.shade300, // Dominant color: Slightly dark blue.
         titleTextStyle: TextStyle(color: Colors.teal.shade100), // Text style: Secondary color.
         iconTheme: IconThemeData(color: Colors.teal.shade100), // Icon theme: Secondary color.
       ),

@@ -90,7 +90,7 @@ class _ProfileScreen extends State<ProfileScreen> {
             ),
             onPressed: () {
               setState(() {
-                currentTheme.toggleTheme(); 
+                Provider.of<CustomTheme>(context, listen: false).toggleTheme();
               });
             },
           ),

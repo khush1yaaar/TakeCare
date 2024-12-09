@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:takecare/theme/themes.dart';
 import 'package:takecare/widgets/constants.dart';
 import 'package:takecare/widgets/messages.dart';
@@ -58,7 +59,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool isTyping = false;
+    final isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
     final theme = Theme.of(context);
 
     return Scaffold(
@@ -73,7 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             onPressed: () {
               setState(() {
-                currentTheme.toggleTheme();
+                Provider.of<CustomTheme>(context, listen: false).toggleTheme();
               });
             },
           ),
@@ -119,49 +120,44 @@ class _ChatScreenState extends State<ChatScreen> {
                       })),
               Padding(
                 padding: EdgeInsets.only(
-                    // ignore: dead_code
-                    bottom: isTyping ? 10 : 80, left: 10, right: 10),
+                  bottom: isKeyboardVisible ? 0 : 80,  // Adjust based on keyboard visibility
+                  left: 10,
+                  right: 10,
+                ),
                 child: Row(
                   children: [
                     Expanded(
                       flex: 15,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isTyping = true;
-                          });
-                        },
-                        child: TextFormField(
-                          style: const TextStyle(
-                              color: Color.fromARGB(255, 19, 17, 17)),
-                          controller: _userInput,
-                          decoration: InputDecoration(
-                            focusColor: Colors.black,
-                            fillColor: Colors.black,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(
-                                color: theme.appBarTheme.backgroundColor ??
+                      child: TextFormField(
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 19, 17, 17)),
+                        controller: _userInput,
+                        decoration: InputDecoration(
+                          focusColor: Colors.black,
+                          fillColor: Colors.black,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(
+                              color: theme.appBarTheme.backgroundColor ??
+                                  Colors.black,
+                              style: BorderStyle.solid,
+                              width: 1.5,
+                            ),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: const BorderSide(
+                                color: Colors.black,
+                                style: BorderStyle.solid),
+                          ),
+                          label: Text(
+                            'Ask Anything',
+                            selectionColor:
+                                theme.appBarTheme.backgroundColor ??
                                     Colors.black,
-                                style: BorderStyle.solid,
-                                width: 1.5,
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                  color: Colors.black,
-                                  style: BorderStyle.solid),
-                            ),
-                            label: Text(
-                              'Ask Anything',
-                              selectionColor:
-                                  theme.appBarTheme.backgroundColor ??
-                                      Colors.black,
-                            ),
-                            floatingLabelStyle: TextStyle(
-                              color: theme.appBarTheme.backgroundColor,
-                            ),
+                          ),
+                          floatingLabelStyle: TextStyle(
+                            color: theme.appBarTheme.backgroundColor,
                           ),
                         ),
                       ),
