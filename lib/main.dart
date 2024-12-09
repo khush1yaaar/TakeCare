@@ -12,11 +12,14 @@ List<CameraDescription>? camera;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   camera = await availableCameras();
-  
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (_) => CustomTheme(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -25,15 +28,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final currentTheme = Provider.of<CustomTheme>(context);
+
     return ChangeNotifierProvider<AuthProvider>(
       create: (context) =>
           AuthProvider(), // Provide an instance of AuthProvider
       child: MaterialApp(
         theme: CustomTheme.lightTheme, // Your custom light theme
-      darkTheme: CustomTheme.darkTheme, // Your custom dark theme
-      themeMode: currentTheme.currentTheme,
+        darkTheme: CustomTheme.darkTheme, // Your custom dark theme
+        themeMode: currentTheme.currentTheme,
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:typed_data';
 
 import 'package:takecare/provider/auth_provider.dart' as takecare_auth;
+import 'package:takecare/theme/themes.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -75,17 +76,34 @@ class _ProfileScreen extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        leading: GestureDetector(
-          onTap: (){
-            //Navigator.pop(context);
-          },
-          child: Icon(Icons.arrow_back,color: Color.fromARGB(255, 49, 162, 197))
-        ),
-        title: const Text('Profile Screen',style: TextStyle(color: Colors.white),),
-        backgroundColor: Color.fromARGB(255, 49, 162, 197),
+        actions: [
+          IconButton(
+            icon: Icon(
+              CustomTheme.isDarkTheme ? Icons.light_mode : Icons.dark_mode,
+              color: Theme.of(context).appBarTheme.backgroundColor,
+            ),
+            onPressed: () {
+              setState(() {
+                currentTheme.toggleTheme(); 
+              });
+            },
+          ),
+        ],
+        title: Text(
+          'Your Profile',
+          style: TextStyle(
+            color: theme.appBarTheme.backgroundColor,
+            fontSize: 25,
+            fontWeight: FontWeight.bold
+          ),
+        ), 
+        backgroundColor: theme.scaffoldBackgroundColor,
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -99,11 +117,11 @@ class _ProfileScreen extends State<ProfileScreen> {
                 onTap: _pickImage,
                 child: CircleAvatar(
                   radius: 115,
-                  backgroundColor: Color.fromARGB(255, 49, 162, 197),
+                  backgroundColor: theme.appBarTheme.backgroundColor,
                   //backgroundImage: AssetImage('lib/images/family.png',),
                   child: _image == null
                       ? _profilePicUrl == null
-                          ? const Icon(Icons.person, size: 80, color: Colors.white)
+                          ? Icon(Icons.person, size: 80, color: theme.appBarTheme.backgroundColor)
                           : ClipOval(
                               child: Image.network(
                                 _profilePicUrl!,
@@ -132,21 +150,21 @@ class _ProfileScreen extends State<ProfileScreen> {
                     label: const Text('Name'),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 49, 162, 197), 
+                          borderSide: BorderSide(
+                            color: theme.appBarTheme.backgroundColor ?? Colors.black, 
                             style: BorderStyle.solid,
                             width: 1.5,
                           ),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: Colors.black,
+                          borderSide: BorderSide(
+                            color: theme.appBarTheme.backgroundColor ?? Colors.black,
                             style: BorderStyle.solid
                           ),
                     ),
-                    floatingLabelStyle: const TextStyle(
-                      color: Color.fromARGB(255, 49, 162, 197),
+                    floatingLabelStyle: TextStyle(
+                      color: theme.appBarTheme.backgroundColor,
                     ),
                   ),
                 ),
@@ -157,25 +175,25 @@ class _ProfileScreen extends State<ProfileScreen> {
                 child: TextField(
                   controller: _bioController,
                   decoration: InputDecoration(
-                    hintText: 'Enter your bio',
-                    labelText: 'Feeling Awesome',
+                    hintText: 'Anything about you',
+                    labelText: 'About',
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 49, 162, 197), 
+                          borderSide: BorderSide(
+                            color: theme.appBarTheme.backgroundColor ?? Colors.black, 
                             style: BorderStyle.solid,
                             width: 1.5,
                           ),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: Colors.black,
+                          borderSide: BorderSide(
+                            color: theme.appBarTheme.backgroundColor ?? Colors.black,
                             style: BorderStyle.solid
                           ),
                     ),
-                    floatingLabelStyle: const TextStyle(
-                            color: Color.fromARGB(255, 49, 162, 197),
+                    floatingLabelStyle: TextStyle(
+                            color: theme.appBarTheme.backgroundColor,
                         ),
                   ),
                 ),
@@ -186,12 +204,12 @@ class _ProfileScreen extends State<ProfileScreen> {
                   Provider.of<takecare_auth.AuthProvider>(context, listen: false).signOut(context);
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 49, 162, 197)),
+                  backgroundColor: WidgetStatePropertyAll(theme.appBarTheme.backgroundColor),
                 ),
                 child: Text(
                   'Sign out',
                   style: TextStyle(
-                    color: Colors.white
+                    color: theme.textTheme.bodyLarge!.color ?? Colors.white
                   ),
                 ),
               )

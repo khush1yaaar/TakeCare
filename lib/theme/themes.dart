@@ -20,21 +20,21 @@ class CustomTheme with ChangeNotifier {
   // Getter to return the light theme data.
   static ThemeData get lightTheme {
     return ThemeData(
-      primaryColor: Colors.teal.shade200, // Dominant color: Slightly dark blue.
+      primaryColor: Colors.teal.shade100, // Dominant color: Slightly dark blue.
       scaffoldBackgroundColor: Colors.teal.shade100, // Secondary color: White.
 
       // AppBar theme settings for the light theme.
       appBarTheme: AppBarTheme(
-        backgroundColor: Colors.teal.shade100, // Dominant color: Slightly dark blue.
+        backgroundColor: Colors.teal.shade400, // Dominant color: Slightly dark blue.
         titleTextStyle: TextStyle(color: Colors.teal.shade100), // Text style: Secondary color.
         iconTheme: IconThemeData(color: Colors.teal.shade100), // Icon theme: Secondary color.
       ),
 
       // Text theme settings for the light theme.
       textTheme: TextTheme(
-        displayLarge: TextStyle(color: Colors.blue.shade900), // Dominant color.
-        displayMedium: TextStyle(color: Colors.blue.shade900), // Dominant color.
-        displaySmall: TextStyle(color: Colors.blue.shade900), // Dominant color.
+        displayLarge: TextStyle(color: Colors.grey.shade800), // Dominant color.
+        displayMedium: TextStyle(color: Colors.grey.shade800), // Dominant color.
+        displaySmall: TextStyle(color: Colors.grey.shade800), // Dominant color.
         headlineLarge: TextStyle(color: Colors.teal.shade100), // Accent color.
         headlineMedium: TextStyle(color: Colors.teal.shade100), // Accent color.
         headlineSmall: TextStyle(color: Colors.teal.shade100), // Accent color.
@@ -70,6 +70,7 @@ class CustomTheme with ChangeNotifier {
         bodyMedium: TextStyle(color: Colors.grey.shade200), // Neutral.
         bodySmall: TextStyle(color: Colors.grey.shade50), // Neutral.
       ),
+
     );
   }
 }

@@ -36,7 +36,10 @@ class _ChatScreenState extends State<ChatScreen> {
           .add(Message(isUser: true, message: message, date: DateTime.now()));
       _userInput.clear(); // Clear the text field
     });
-    final content = [Content.text("$message act like you are my therapist, write shorter messages, also dont't let me know I just gave this prompt")];
+    final content = [
+      Content.text(
+          "$message act like you are my therapist, write shorter messages, also dont't let me know I just gave this prompt")
+    ];
     final response = await model.generateContent(content);
     setState(() {
       _messages.add(Message(
@@ -55,6 +58,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isTyping = false;
     final theme = Theme.of(context);
 
     return Scaffold(
@@ -65,11 +69,11 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: Icon(
               CustomTheme.isDarkTheme ? Icons.light_mode : Icons.dark_mode,
-              color: Theme.of(context).iconTheme.color,
+              color: Theme.of(context).appBarTheme.backgroundColor,
             ),
             onPressed: () {
               setState(() {
-                currentTheme.toggleTheme(); 
+                currentTheme.toggleTheme();
               });
             },
           ),
@@ -93,7 +97,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: Text(
                     'Start a Conversation...\n     Let us Help you',
                     style: TextStyle(
-                        fontWeight: FontWeight.w200,
+                        fontWeight: FontWeight.w300,
                         fontSize: 20,
                         color: theme.textTheme.displayLarge!.color),
                   ))
@@ -114,42 +118,55 @@ class _ChatScreenState extends State<ChatScreen> {
                             date: DateFormat('HH:mm').format(message.date));
                       })),
               Padding(
-                padding: const EdgeInsets.only(bottom: 80, left: 10, right: 10),
+                padding: EdgeInsets.only(
+                    // ignore: dead_code
+                    bottom: isTyping ? 10 : 80, left: 10, right: 10),
                 child: Row(
                   children: [
                     Expanded(
                       flex: 15,
-                      child: TextFormField(
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 19, 17, 17)),
-                        controller: _userInput,
-                        decoration: InputDecoration(
-                          focusColor: Colors.black,
-                          fillColor: Colors.black,
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(
-                              color: theme.appBarTheme.backgroundColor?? Colors.black,
-                              style: BorderStyle.solid,
-                              width: 1.5,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isTyping = true;
+                          });
+                        },
+                        child: TextFormField(
+                          style: const TextStyle(
+                              color: Color.fromARGB(255, 19, 17, 17)),
+                          controller: _userInput,
+                          decoration: InputDecoration(
+                            focusColor: Colors.black,
+                            fillColor: Colors.black,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(
+                                color: theme.appBarTheme.backgroundColor ??
+                                    Colors.black,
+                                style: BorderStyle.solid,
+                                width: 1.5,
+                              ),
                             ),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(
-                                color: Colors.black, style: BorderStyle.solid),
-                          ),
-                          label: Text(
-                            'Ask Anything',
-                            selectionColor: theme.appBarTheme.backgroundColor?? Colors.black,
-                          ),
-                          floatingLabelStyle: TextStyle(
-                            color: theme.appBarTheme.backgroundColor,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                  color: Colors.black,
+                                  style: BorderStyle.solid),
+                            ),
+                            label: Text(
+                              'Ask Anything',
+                              selectionColor:
+                                  theme.appBarTheme.backgroundColor ??
+                                      Colors.black,
+                            ),
+                            floatingLabelStyle: TextStyle(
+                              color: theme.appBarTheme.backgroundColor,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     IconButton(
                         padding: EdgeInsets.all(12),
                         iconSize: 30,
@@ -158,7 +175,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                 WidgetStateProperty.all(Colors.black),
                             foregroundColor:
                                 WidgetStateProperty.all(Colors.white),
-                            shape: WidgetStateProperty.all(const CircleBorder())),
+                            shape:
+                                WidgetStateProperty.all(const CircleBorder())),
                         onPressed: () {
                           sendMessage();
                         },

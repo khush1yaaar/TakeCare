@@ -23,6 +23,14 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: theme.appBarTheme.backgroundColor,
+            )),
         title: Text(
           'Time to know YourSelf better',
           style: TextStyle(

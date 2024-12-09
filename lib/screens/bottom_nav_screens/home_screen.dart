@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:takecare/screens/article_screen.dart';
 import 'package:takecare/screens/assessment_screen.dart';
 import 'package:takecare/screens/emotion_detection_screen.dart';
@@ -38,11 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: Icon(
               CustomTheme.isDarkTheme ? Icons.light_mode : Icons.dark_mode,
-              color: Theme.of(context).iconTheme.color,
+              color: Theme.of(context).appBarTheme.backgroundColor,
             ),
             onPressed: () {
               setState(() {
-                currentTheme.toggleTheme(); 
+                Provider.of<CustomTheme>(context, listen: false).toggleTheme();
               });
             },
           ),
@@ -141,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 200,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: const Color(0xFF424242), // Medium grey container
+            color: Theme.of(context).appBarTheme.backgroundColor, // Medium grey container
             borderRadius: BorderRadius.circular(15),
             boxShadow: [
               BoxShadow(

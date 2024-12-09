@@ -207,39 +207,11 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // void saveUserDataToFirebase({
-  //   required BuildContext context,
-  //   required UserModel userModel,
-  //   required File profilePic,
-  //   required Function OnSuccess,
-  // }) async {
-  //   try {
-  //     // Save data to Firestore
-  //     await _firebaseFirestore
-  //         .collection("users")
-  //         .doc(userModel.phoneNumber)
-  //         .set(userModel.toMap())
-  //         .then((value) {
-  //       OnSuccess();
-  //     });
-  //   } catch (e) {
-  //     // Handle errors
-  //     print('Error saving user data: $e');
-  //   }
-  // }
-
-//   Future<String> storeFileToStorage(String ref, File file) async {
-//     UploadTask uploadTask = _firebaseStorage.ref().child(ref).putFile(file);
-//     TaskSnapshot taskSnapshot = await uploadTask;
-//     String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-//     return downloadUrl;
-//   }
-
+  
   Future saveUserDataToSP() async {
     SharedPreferences s = await SharedPreferences.getInstance();
     await s.setString("user_model", jsonEncode(userModel.toMap()));
   }
-//}
 
 void saveUserDataToFirebase({
   required BuildContext context,
@@ -249,9 +221,6 @@ void saveUserDataToFirebase({
   required Function OnSuccess,
 }) async {
   try {
-    // First, upload the profile picture to Firebase Storage
-    // String profilePicUrl = await storeFileToStorage("profilePics/${userModel.uid}", profilePic);
-    // userModel.profilePic = profilePicUrl; // Update user model with profile picture URL
     await storeFileToStorage("profilePics/${userModel}.uid", profilePic).then((value) {
       userModel.profilePic = value;
       userModel.phoneNumber = _firebaseAuth.currentUser!.phoneNumber!;
