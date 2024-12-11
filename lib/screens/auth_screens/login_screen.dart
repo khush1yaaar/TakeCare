@@ -12,136 +12,166 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   final TextEditingController phoneController = TextEditingController();
   Country selectedCountry = Country(
-    phoneCode: '91', 
-    countryCode: 'IN', 
-    e164Sc: 0, 
-    geographic: true, 
-    level: 1, 
-    name: 'India', 
-    example: 'India', 
-    displayName: 'India', 
-    displayNameNoCountryCode: 'IN', 
-    e164Key: '');
+      phoneCode: '91',
+      countryCode: 'IN',
+      e164Sc: 0,
+      geographic: true,
+      level: 1,
+      name: 'India',
+      example: 'India',
+      displayName: 'India',
+      displayNameNoCountryCode: 'IN',
+      e164Key: '');
 
-    @override
+  @override
   void dispose() {
     super.dispose();
-    //phoneController.dispose(); 
+    //phoneController.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     phoneController.selection = TextSelection.fromPosition(
       TextPosition(offset: phoneController.text.length),
     );
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
             Image.asset('lib/images/therapy.png'),
-            const Text('OTP Verification',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-            const Text('We will send you an One Time Password on \n                      this Mobile Number',style: TextStyle(color: Colors.grey),),
+            const Text(
+              'OTP Verification',
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueGrey),
+            ),
+            const Text(
+              'We will send you an One Time Password on \n                      this Mobile Number',
+              style: TextStyle(color: Colors.grey),
+            ),
             const SizedBox(
               height: 20,
             ),
-            const Text('Entre your Mobile Number'),
+            const Text(
+              'Entre your Mobile Number',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueGrey, // Updated color here
+              ),
+            ),
             const SizedBox(
               height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15,right: 15),
+              padding: const EdgeInsets.only(left: 15, right: 15),
               child: TextFormField(
-                cursorColor: Colors.blue.shade100,
+                cursorColor: theme.scaffoldBackgroundColor,
                 controller: phoneController,
-                onChanged: (value){
+                onChanged: (value) {
                   setState(() {
                     phoneController.text = value;
                   });
                 },
-                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18, color: Colors.black),
                 decoration: InputDecoration(
                   hintText: 'Entre phone number',
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.black12)
-                  ),
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.black12)),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.black)
-                  ),
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.black)),
                   prefixIcon: Container(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
-                        onTap: (){
+                        onTap: () {
                           showCountryPicker(
-                            context: context, 
-                            countryListTheme: const CountryListThemeData(
-                              bottomSheetHeight: 500),
-                            onSelect: (value){
-                            setState(() {
-                              selectedCountry = value;
-                            });
-                          });
+                              context: context,
+                              countryListTheme: const CountryListThemeData(
+                                  bottomSheetHeight: 500),
+                              onSelect: (value) {
+                                setState(() {
+                                  selectedCountry = value;
+                                });
+                              });
                         },
-                        child: Text("${selectedCountry.flagEmoji}  +${selectedCountry.phoneCode}",
+                        child: Text(
+                          "${selectedCountry.flagEmoji}  +${selectedCountry.phoneCode}",
                           style: const TextStyle(
                             fontSize: 20,
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
-                          ),),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                  suffixIcon: phoneController.text.length == 10? const Icon(Icons.done,color: Colors.green,size: 30,):null,
-                  ),
-              ), 
+                  suffixIcon: phoneController.text.length == 10
+                      ? const Icon(
+                          Icons.done,
+                          color: Colors.green,
+                          size: 30,
+                        )
+                      : null,
+                ),
+              ),
             ),
             const SizedBox(
               height: 40,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30,right: 30),
+              padding: const EdgeInsets.only(left: 30, right: 30),
               child: SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                          onPressed: () async{
-                            //final ap = Provider.of<AuthProvider>(context,listen: false);
-                            if(phoneController.text.length == 10){
-                              //storeData();
-                              _showLoadingDialog(context);
-                              sendPhoneNumber();
-                              print('called sendPhone Number');
-                            }
-                          }, 
-                          style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor: phoneController.text.length == 10? MaterialStateProperty.all<Color>(Colors.blue.shade100): MaterialStateProperty.all<Color>(Colors.grey),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                            ),),
-                          ),
-                          child: const Text(
-                            'Get OTP', 
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold)),),
-                            ),
+                  onPressed: () async {
+                    //final ap = Provider.of<AuthProvider>(context,listen: false);
+                    if (phoneController.text.length == 10) {
+                      //storeData();
+                      _showLoadingDialog(context);
+                      sendPhoneNumber();
+                      print('called sendPhone Number');
+                    }
+                  },
+                  style: ButtonStyle(
+                    foregroundColor:
+                        WidgetStateProperty.all<Color>(Colors.white),
+                    backgroundColor: phoneController.text.length == 10
+                        ? WidgetStateProperty.all<Color>(
+                            theme.scaffoldBackgroundColor)
+                        : WidgetStateProperty.all<Color>(Colors.grey),
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                    ),
+                  ),
+                  child: const Text('Get OTP',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                ),
+              ),
             )
           ],
         ),
       ),
     );
   }
-  void sendPhoneNumber(){
-    final ap = Provider.of<AuthProvider>(context,listen: false);
+
+  void sendPhoneNumber() {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
     String phoneNumber = phoneController.text.trim();
-    ap.signInWithPhone(context,"+91$phoneNumber");
+    ap.signInWithPhone(context, "+91$phoneNumber");
   }
 
   void _showLoadingDialog(BuildContext context) {

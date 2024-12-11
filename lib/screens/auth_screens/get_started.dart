@@ -5,7 +5,6 @@ import 'package:takecare/provider/auth_provider.dart';
 import 'package:takecare/screens/bottom_nav_screens/home_screen.dart';
 import 'package:takecare/screens/auth_screens/login_screen.dart';
 
-
 class GetStartedScreen extends StatefulWidget {
   static String id = 'getstarted-screen';
   const GetStartedScreen({super.key});
@@ -55,7 +54,10 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Expanded(
@@ -82,34 +84,40 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
-              activeColor: Colors.blue.shade300,
+              activeColor: theme.scaffoldBackgroundColor,
             ),
           ),
           const SizedBox(height: 50),
-          const Text('Ready to feel better?',style: TextStyle(color: Colors.grey,fontSize: 15),),
+          const Text(
+            'Ready to feel better?',
+            style: TextStyle(color: Colors.blueGrey, fontSize: 15),
+          ),
           const SizedBox(height: 20),
           ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.blue.shade300),
+            style:
+                ElevatedButton.styleFrom(backgroundColor: theme.scaffoldBackgroundColor),
             onPressed: () async {
-              // await isSignedIn() ? 
+              // await isSignedIn() ?
               //   Navigator.pushReplacement(
-              //     context, 
+              //     context,
               //     MaterialPageRoute(builder: (context)=> const BottomNavBar())):
-                Navigator.pushReplacement(
-                  context, 
-                  MaterialPageRoute(builder: (context)=> const LoginScreen()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()));
             },
-            icon: const Icon(Icons.phone,color: Colors.black,),
-            label: RichText(text: 
-            const TextSpan(
-              style: TextStyle(color: Colors.black),
-              children: [
-                TextSpan(text: 'Sign in with '),
-                TextSpan(text: 'Phone Number',style: TextStyle(fontWeight: FontWeight.bold)),
-              ]
-            )),
+            icon: const Icon(
+              Icons.phone,
+              color: Colors.black,
+            ),
+            label: RichText(
+                text: const TextSpan(
+                    style: TextStyle(color: Colors.black),
+                    children: [
+                  TextSpan(text: 'Sign in with '),
+                  TextSpan(
+                      text: 'Phone Number',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ])),
           ),
-
           const SizedBox(height: 40),
           const SizedBox(height: 50),
         ],
@@ -122,21 +130,20 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
   // }
 
   void navigateToNextScreen() async {
-    final isUserLoggedIn = await Provider.of<AuthProvider>(context, listen: false).checkLoggedIn();
+    final isUserLoggedIn =
+        await Provider.of<AuthProvider>(context, listen: false).checkLoggedIn();
     if (isUserLoggedIn) {
       Navigator.pushReplacement(
-        context, 
-        MaterialPageRoute(
-          builder: (context)=> const HomeScreen(),
-        )
-      );
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
+          ));
     } else {
       Navigator.pushReplacement(
-        context, 
-        MaterialPageRoute(
-          builder: (context)=> const LoginScreen(),
-        )
-      );
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LoginScreen(),
+          ));
     }
   }
 }
@@ -162,6 +169,7 @@ class PageContent extends StatelessWidget {
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w700,
+            color: Colors.blueGrey
           ),
           textAlign: TextAlign.center,
         ),

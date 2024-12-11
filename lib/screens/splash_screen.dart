@@ -4,7 +4,7 @@ import 'package:flutter/physics.dart';
 import 'package:provider/provider.dart';
 import 'package:takecare/provider/auth_provider.dart';
 import 'package:takecare/screens/bottom_nav_screens/bottom_nav.dart';
-import 'package:takecare/screens/get_started.dart';
+import 'package:takecare/screens/auth_screens/get_started.dart';
 
 
 class SplashScreen extends StatefulWidget {

@@ -20,12 +20,15 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     final isLoading = Provider.of<AuthProvider>(context, listen: true).isLoading;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: isLoading
           ? Center(
               child: CircularProgressIndicator(
-                color: Colors.blue.shade400,
+                color: theme.scaffoldBackgroundColor,
               ),
             )
           : Center(
@@ -35,7 +38,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     Image.asset('lib/images/teen_image.png'),
                     const Text(
                       'OTP Verification',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueGrey),
                     ),
                     const SizedBox(
                       height: 40,
@@ -55,8 +58,8 @@ class _OtpScreenState extends State<OtpScreen> {
                           height: 50,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: Colors.blue.shade300)),
-                          textStyle: const TextStyle(fontSize: 28)),
+                              border: Border.all(color: theme.scaffoldBackgroundColor)),
+                          textStyle: const TextStyle(fontSize: 28, color: Colors.black)),
                       onCompleted: (value) {
                         setState(() {
                           otpcode = value;
@@ -90,11 +93,15 @@ class _OtpScreenState extends State<OtpScreen> {
                           }
                         },
                         style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.blue.shade300,
+                          foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+                          backgroundColor: otpcode != null && otpcode!.length == 6 ? 
+                          WidgetStateProperty.all<Color>(
+                            theme.scaffoldBackgroundColor,
+                          ) : 
+                          WidgetStateProperty.all<Color>(
+                            Colors.blueGrey,
                           ),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25.0),
                             ),

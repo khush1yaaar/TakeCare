@@ -18,9 +18,8 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _userInput = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   late String apiKey;
-  // final GenerativeModel model;
-  // final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
   late GenerativeModel model;
+  
   @override
   void initState() {
     super.initState();

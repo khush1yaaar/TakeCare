@@ -15,21 +15,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //late Future<DocumentSnapshot<Map<String, dynamic>>> _nameFuture;
-
   @override
   void initState() {
     super.initState();
-    //_nameFuture = _fetchName();
   }
-
-  // Future<DocumentSnapshot<Map<String, dynamic>>> _fetchName() async {
-  //   return FirebaseFirestore.instance.collection('users').doc('name').get();
-  // }
-
   @override
   Widget build(BuildContext context) {
-
     final theme = Theme.of(context);
 
     return Scaffold(
